@@ -1,21 +1,23 @@
 // @flow
 import * as React from 'react';
-import { Navbar } from '../components/common';
+import { Header } from '../components/layout';
 import styles from './App.scss';
 
 type Props = {
-  children: React.Node
+    children: React.Node
 };
 
 export default class App extends React.Component<Props> {
-  props: Props;
+    props: Props;
 
-  render() {
-    return (
-      <div className={styles.container}>
-        <Navbar />
-        {this.props.children}
-      </div>
-    );
-  }
+    render() {
+        return (
+            <div className={styles.container}>
+                <Header />
+                <div className={styles.body}>
+                    {this.props.children}
+                </div>
+            </div>
+        );
+    }
 }

@@ -1,0 +1,52 @@
+@import '../../materialize/sass/components/color-variables';
+@import '../../materialize/sass/components/color-classes';
+@import '../../materialize/sass/components/variables';
+
+.container {
+    position: relative;
+    display: table;
+    height: 100%;
+    width: 100%;
+}
+
+.alignment {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.content {
+    display: block;
+    position: relative;
+    height: 40%;
+    padding: 0 10rem;
+}
+
+.card {
+    padding: 0 3rem !important;
+    height: 100% !important;
+    margin: auto;
+}
+
+.card-title {
+    display: block;
+    text-align: center;
+    padding: 1rem;
+    white-space: nowrap;
+}
+
+.card-content {
+    color: color("grey", "darken-3");
+    display: table;
+    margin: auto;
+    left: 0;
+    right: 0;
+    padding: 1rem;
+
+    &:active, &:hover, &:focus {
+        background-color: transparent !important;
+    }
+
+    > i {
+        display: block;
+    }
+}

@@ -1,0 +1,17 @@
+@import '../../../materialize/sass/components/color-variables';
+@import '../../../materialize/sass/components/color-classes';
+@import '../../../materialize/sass/components/variables';
+
+.content {
+    height: 100%;
+
+    &:hover, :focus{
+        cursor: pointer;
+        background-color: color("grey", "lighten-4") !important;
+    }
+
+    &:active {
+        cursor: pointer;
+        background-color: color("grey", "lighten-3") !important;
+    }
+}
