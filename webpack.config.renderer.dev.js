@@ -210,7 +210,10 @@ export default merge.smart(baseConfig, {
 
     new webpack.NoEmitOnErrorsPlugin(),
 
-    new CopyWebpackPlugin([{ from: './resources/font-awesome', to: './font-awesome' }]),
+    new CopyWebpackPlugin([
+      { from: './resources/font-awesome', to: './font-awesome' }, 
+      { from: './resources/patch', to: './patch' }
+    ]),
     /**
      * Create global constants which can be configured at compile time.
      *

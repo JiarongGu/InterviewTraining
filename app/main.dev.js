@@ -10,10 +10,7 @@
  *
  * @flow
  */
-import {
-  app,
-  BrowserWindow
-} from 'electron';
+import { app, BrowserWindow } from 'electron';
 import MenuBuilder from './menu';
 import fs from 'fs';
 
@@ -58,7 +55,6 @@ const initalizeFolders = function() {
 /**
  * Add event listeners...
  */
-
 app.on('window-all-closed', () => {
   // Respect the OSX convention of having the application in memory even
   // after all windows have been closed

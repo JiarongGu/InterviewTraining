@@ -1,0 +1,28 @@
+.container {
+    position: relative;
+    display: table;
+    height: 100%;
+    width: 100%;
+}
+
+.alignment {
+    display: table-cell;
+    vertical-align: middle;
+
+    > div {
+        display: table;
+        margin: auto;
+        left: 0;
+        right: 0;
+        position: relative;
+    }
+}
+
+.button-container {
+    padding-top: 5rem;
+}
+
+.button {
+    padding: 0 4rem;
+    text-transform: none;
+}

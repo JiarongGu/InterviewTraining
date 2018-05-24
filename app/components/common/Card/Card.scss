@@ -4,7 +4,8 @@
 
 .content {
     height: 100%;
-
+    padding: 0 !important;
+    
     &:hover, :focus{
         cursor: pointer;
         background-color: color("grey", "lighten-4") !important;

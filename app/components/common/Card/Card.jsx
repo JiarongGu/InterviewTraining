@@ -13,9 +13,7 @@ export class Card extends Component<Props> {
         return (
             <div className={classNames(mStyles['col'], mStyles[this.props.size], this.props.className)}>
                 <div className={classNames(mStyles['card-panel'], mStyles['white'], mStyles['lighten-5'], styles.content)}>
-                    <span className={classNames(mStyles['grey-text'], mStyles['text-darken-3'])}>
-                        {this.props.children}
-                    </span>
+                    {this.props.children}
                 </div>
             </div>
         );

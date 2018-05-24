@@ -40,7 +40,8 @@
     margin: auto;
     left: 0;
     right: 0;
-    padding: 1rem;
+    padding: 3rem;
+    height: 100%;
 
     &:active, &:hover, &:focus {
         background-color: transparent !important;
@@ -48,5 +49,9 @@
 
     > i {
         display: block;
+        margin: auto;
+        left: 0;
+        right: 0;
+        display: inherit;
     }
 }

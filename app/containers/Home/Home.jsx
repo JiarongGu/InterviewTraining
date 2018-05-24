@@ -20,20 +20,20 @@ export class Home extends Component<Props> {
                         <Card className={styles.card} size={'m4'}>
                             <Link to={'/'} className={styles['card-content']}>
                                 <Icon icon={'lightbulb'} style={'Regular'} size={'10x'} />
+                                <h4 className={styles['card-title']}>Tips</h4>
                             </Link>
-                            <h4 className={styles['card-title']}>Tips</h4>
                         </Card>
                         <Card className={styles.card} size={'m4'}>
-                            <Link to={'/'} className={styles['card-content']}>
+                            <Link to={'/training'} className={styles['card-content']}>
                                 <Icon icon={'video'} style={'Solid'} size={'10x'} />
+                                <h4 className={styles['card-title']}>Self Training</h4>
                             </Link>
-                            <h4 className={styles['card-title']}>Self Training</h4>
                         </Card>
                         <Card className={styles.card} size={'m4'}>
                             <Link to={'/'} className={styles['card-content']}>
                                 <Icon icon={'calendar-alt'} style={'Regular'} size={'10x'} />
+                                <h4 className={styles['card-title']}>Book Interview</h4>
                             </Link>
-                            <h4 className={styles['card-title']}>Book Interview</h4>
                         </Card>
                     </div>
                 </div>

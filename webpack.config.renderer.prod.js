@@ -171,7 +171,12 @@ export default merge.smart(baseConfig, {
     }),
 
     new ExtractTextPlugin('style.css'),
-    new CopyWebpackPlugin([{ from: './resources/font-awesome', to: './font-awesome' }]),
+    
+    new CopyWebpackPlugin([
+      { from: './resources/font-awesome', to: './font-awesome' }, 
+      { from: './resources/patch', to: './patch' }
+    ]),
+
     new BundleAnalyzerPlugin({
       analyzerMode: process.env.OPEN_ANALYZER === 'true' ? 'server' : 'disabled',
       openAnalyzer: process.env.OPEN_ANALYZER === 'true'
