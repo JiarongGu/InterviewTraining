@@ -1,0 +1,9 @@
+@import '../materialize/sass/components/color-variables';
+@import '../materialize/sass/components/color-classes';
+@import '../materialize/sass/components/variables';
+
+.container {
+    background-color: color("teal", "lighten-5");
+    height: 100vh;
+    width: 100vw;
+}
