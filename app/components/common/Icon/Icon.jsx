@@ -4,7 +4,8 @@ import classNames from 'classnames';
 type Props = {
     icon: string,
     style?: 'Brands' | 'Solid' | 'Light' | 'Regular',
-    size?: 'xs' | 'sm' | 'lg' | '2x' | '3x' | '5x' | '7x' | '10x'
+    size?: 'xs' | 'sm' | 'lg' | '2x' | '3x' | '5x' | '7x' | '10x',
+    onClick?: (event) => {}
 };
 
 export class Icon extends React.Component<Props> {
@@ -25,7 +26,7 @@ export class Icon extends React.Component<Props> {
         const size = this.props.size ? `fa-${this.props.size}` : '';
 
         return (
-            <i className={classNames(style, icon, size, this.props.className)}></i>
+            <i className={classNames(style, icon, size, this.props.className)} onClick={this.props.onClick}></i>
         );
     }
 }

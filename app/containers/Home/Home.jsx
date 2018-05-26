@@ -19,19 +19,19 @@ export class Home extends Component<Props> {
                     <div className={classNames(mStyles['row'], styles.content)}>
                         <Card className={styles.card} size={'m4'}>
                             <Link to={'/'} className={styles['card-content']}>
-                                <Icon icon={'lightbulb'} style={'Regular'} size={'10x'} />
+                                <Icon icon={'lightbulb'} style={'Regular'} size={'7x'} />
                                 <h4 className={styles['card-title']}>Tips</h4>
                             </Link>
                         </Card>
                         <Card className={styles.card} size={'m4'}>
                             <Link to={'/training'} className={styles['card-content']}>
-                                <Icon icon={'video'} style={'Solid'} size={'10x'} />
+                                <Icon icon={'video'} style={'Solid'} size={'7x'} />
                                 <h4 className={styles['card-title']}>Self Training</h4>
                             </Link>
                         </Card>
                         <Card className={styles.card} size={'m4'}>
                             <Link to={'/'} className={styles['card-content']}>
-                                <Icon icon={'calendar-alt'} style={'Regular'} size={'10x'} />
+                                <Icon icon={'calendar-alt'} style={'Regular'} size={'7x'} />
                                 <h4 className={styles['card-title']}>Book Interview</h4>
                             </Link>
                         </Card>

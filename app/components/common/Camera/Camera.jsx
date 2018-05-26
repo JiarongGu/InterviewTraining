@@ -15,8 +15,9 @@ type Props = {
   output: string,
   onSaved?: filepath => void,
   onError?: error => void,
-  autoPlay?: boolean,
-  styles: { video: string }
+  styles: { video: string },
+  onMouseEnter?: event => void,
+  onMouseLeave?: event => void
 };
 
 type State = {
@@ -38,64 +39,80 @@ export class Camera extends Component<Props, State> {
       styles: {}
     };
 
-    this.startRecord = this.startRecord.bind(this);
-    this.stopRecord = this.stopRecord.bind(this);
+    this.startRecording = this.startRecording.bind(this);
+    this.stopRecording = this.stopRecording.bind(this);
     this.videoRef = React.createRef();
   }
 
   componentDidMount() {
     const recordingOptions = {
       mimeType: 'video/webm', // or video/webm\;codecs=h264 or video/webm\;codecs=vp9
-      bitsPerSecond: 256000 // if this line is provided, skip above two
+      bitsPerSecond: 512000 // if this line is provided, skip above two
     };
 
     const videoNode = this.videoRef.current;
     const autoPlay = this.props.autoPlay;
-    
+
     navigator.mediaDevices
-      .getUserMedia({ video: true, audio: true })
+      .getUserMedia({
+        video: {
+          aspectRatio: { ideal: 1.9237 }
+        },
+        audio: true
+      })
       .then(stream => {
-        this.setState({
-          src: URL.createObjectURL(stream),
-          recordVideo: RecordRTC(stream, recordingOptions)
-        }, ()=> {
-          if(autoPlay) {
-            this.startRecord();
-          } else {
+        this.setState(
+          {
+            src: URL.createObjectURL(stream),
+            recordVideo: RecordRTC(stream, recordingOptions)
+          },
+          () => {
             videoNode.pause();
           }
-        });
+        );
       })
       .catch(error => {
         if (this.props.onError) this.props.onError(error);
+
+        console.log(error);
       });
   }
 
-  startRecord() {
+  startRecording() {
     this.state.recordVideo.startRecording();
     this.videoRef.current.play();
   }
 
-  stopRecord() {
+  stopRecording() {
     const videoNode = this.videoRef.current;
     const output = this.props.output;
 
-    this.state.recordVideo.stopRecording(() => {
-      videoNode.pause();
-      const blob = this.state.recordVideo.getBlob();
+    const promise = new Promise((resolve, reject) => {
+      this.state.recordVideo.stopRecording(() => {
+        videoNode.pause();
+        const blob = this.state.recordVideo.getBlob();
 
-      const fileReader = new FileReader();
-      fileReader.onload = function() {
-        const buffer = new Buffer(fileReader.result);
-        fs.writeFile(`${output}/${uuidv4()}.webm`, buffer, err => {
-          if (err) {
-            if (this.props.onError) this.props.onError(err);
-            return;
-          }
-        });
-      };
-      fileReader.readAsArrayBuffer(blob);
+        const fileReader = new FileReader();
+        fileReader.onload = function() {
+          const buffer = new Buffer(fileReader.result);
+          const filePath = `${output}/${uuidv4()}.webm`;
+          fs.writeFile(filePath, buffer, err => {
+            if(resolve) resolve(filePath);
+
+            if (err) {
+              if (this.props.onError) {
+                this.props.onError(err);
+              }
+              if(reject) reject(err);
+              return;
+            }
+          });
+        };
+        fileReader.readAsArrayBuffer(blob);
+      });
     });
+
+    return promise;
   }
 
   render() {
@@ -103,12 +120,14 @@ export class Camera extends Component<Props, State> {
 
     return (
       <div className={styles.container}>
-        <video src={this.state.src} ref={this.videoRef} muted className={this.props.styles.video} 
-            onMouseEnter={() => {console.log("camera hover");}} />
-        <div>
-          <button onClick={this.startRecord}>Start Record</button>
-          <button onClick={this.stopRecord}>Stop Record</button>
-        </div>
+        <video
+          src={this.state.src}
+          ref={this.videoRef}
+          muted
+          className={this.props.styles.video}
+          onMouseEnter={this.props.onMouseEnter}
+          onMouseLeave={this.props.onMouseLeave}
+        />
       </div>
     );
   }

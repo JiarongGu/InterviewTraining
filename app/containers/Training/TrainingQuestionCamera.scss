@@ -1,34 +1,58 @@
 @import '../../materialize/sass/components/color-variables';
 @import '../../materialize/sass/components/color-classes';
 @import '../../materialize/sass/components/variables';
-
 .container {
-    width: 100vw;
-    height: calc(100vh - 64px);
-    background-color: color("teal", "lighten-5");
-    display: table;
+  width: 100vw;
+  height: calc(100vh - 64px);
+  background-color: color("teal", "lighten-5");
+  display: table;
 }
 
 .alignment {
-    display: table-cell;
-    vertical-align: middle;
-
-    >div{
-        margin: auto;
-        display: table;
-    }
+  display: table-cell;
+  vertical-align: middle;
+  >div {
+    margin: auto;
+    display: table;
+  }
 }
 
 .video {
-    width: 100vw;
+  width: 100vw;
 }
 
-.countDown {
-    color: $primary-color;
-    font-size: 6rem;
-    border: 0.5rem solid $primary-color;
-    height: 10rem;
-    width: 10rem;
-    text-align: center;
-    border-radius: 50%;
+.controls {
+  position: absolute;
+  width: 100vw;
+  height: calc(100vh - 64px);
 }
+
+.stop-button {
+  position: absolute;
+  bottom: 5rem;
+  margin: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+  >div {
+    border-radius: 50%;
+    background-color: white;
+    display: table;
+    left: 0;
+    right: 0;
+    margin: auto;
+    box-shadow: inset 0px 0px 0px 10px color("materialize-red", "base");
+  }
+  i {
+    color: color("materialize-red", "base");
+
+    &:hover, &:focus {
+      color: color("materialize-red", "lighten-1");
+    }
+
+    &:active {
+      color: color("materialize-red", "darken-1");
+    }
+  }
+}
+
