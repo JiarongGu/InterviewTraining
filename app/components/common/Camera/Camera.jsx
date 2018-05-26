@@ -12,8 +12,9 @@ import styles from './Camera.scss';
 type Props = {
     height?: number,
     width?: number,
-    savedDir: string,
+    output: string,
     onSaved?: (filepath) => void;
+    onError?: (error) => void;
 };
 
 type State = {
@@ -22,9 +23,6 @@ type State = {
     uploadSuccess: object,
     uploading: boolean
 };
-
-const hasGetUserMedia = !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
-    navigator.mozGetUserMedia || navigator.msGetUserMedia);
 
 export class Camera extends Component<Props, State> {
     constructor(props) {
@@ -43,11 +41,6 @@ export class Camera extends Component<Props, State> {
     }
 
     componentDidMount() {
-        if (!hasGetUserMedia) {
-            alert('Your browser cannot stream from your webcam. Please switch to Chrome or Firefox.');
-            return;
-        }
-
         const recordingOptions = {
             mimeType: 'video/webm', // or video/webm\;codecs=h264 or video/webm\;codecs=vp9
             bitsPerSecond: 256000 // if this line is provided, skip above two
@@ -60,7 +53,7 @@ export class Camera extends Component<Props, State> {
                 this.setState({ src: URL.createObjectURL(stream), recordVideo: RecordRTC(stream, recordingOptions) });
             })
             .catch((error) => {
-                alert(JSON.stringify(error));
+                if(this.props.onError) this.props.onError(error);
             });
     }
 
@@ -71,7 +64,7 @@ export class Camera extends Component<Props, State> {
 
     stopRecord() {
         const videoNode = this.videoRef.current;
-        const savedDir = this.props.savedDir;
+        const output = this.props.output;
 
         this.state.recordVideo.stopRecording(() => {
             videoNode.pause();
@@ -80,10 +73,10 @@ export class Camera extends Component<Props, State> {
             const fileReader = new FileReader();
             fileReader.onload = function () {
                 const buffer = new Buffer(fileReader.result);
-                fs.writeFile(`${savedDir}/${uuidv4()}.webm`, buffer,
+                fs.writeFile(`${output}/${uuidv4()}.webm`, buffer,
                     (err) => {
                         if (err) {
-                            console.log(err);
+                            if(this.props.onError) this.props.onError(err);
                             return;
                         }
                     }

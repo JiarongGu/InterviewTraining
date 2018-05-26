@@ -6,7 +6,7 @@ import styles from './Button.scss';
 type Props = {
     className?: any,
     children?: React.ReactNode,
-    onClick: (event) => void
+    onClick?: (event) => void
 }
 
 export class Button extends Component<Props> {

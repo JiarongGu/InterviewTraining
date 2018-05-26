@@ -2,19 +2,27 @@
   "questions": [
     {
       "id": "4ec0f76a-b211-4c60-a830-287a1884fb06",
-      "question": "Why should we hire you?"
+      "question": "Why should we hire you?",
+      "takes": 0,
+      "time": 2
     },
     {
       "id": "586b17ce-7085-4515-b7b2-51e81c4bba80",
-      "question": "Tell me about yourself"
+      "question": "Tell me about yourself",
+      "takes": 0,
+      "time": 3
     },
     {
       "id": "6e95d09a-5125-4052-9592-cb2a0f9628fe",
-      "question": "Why do you want this job?"
+      "question": "Why do you want this job?",
+      "takes": 0,
+      "time": 2
     },
     {
       "id": "ea75d041-9a63-40f4-a81a-420952b67780",
-      "question": "What are your salary expectations?"
+      "question": "What are your salary expectations?",
+      "takes": 0,
+      "time": 1
     }
   ]
 }

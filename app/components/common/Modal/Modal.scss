@@ -1,0 +1,23 @@
+.overlay {
+  display: table;
+  position: fixed;
+
+  z-index: 1002;
+  top: 64px;
+  left: 0;
+
+  height: calc(100vh - 64px);
+  width: 100vw;
+
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.container {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.alignment {
+  display: table;
+  margin: auto;
+}

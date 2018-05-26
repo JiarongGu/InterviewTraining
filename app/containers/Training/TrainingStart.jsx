@@ -39,7 +39,7 @@ class TrainingStartComponent extends Component<Props> {
               {questions.length > 0 && (
                 <LinkButton
                   className={classNames(mStyles["btn-large"], styles.button)}
-                  to={"/training/question/0"}
+                  to={"/training/question/0/detail"}
                 >
                   <h5>Start</h5>
                 </LinkButton>

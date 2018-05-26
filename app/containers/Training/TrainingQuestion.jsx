@@ -2,13 +2,8 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import {
-  Card,
-  Camera,
-  Icon,
-  LinkButton,
-  Button
-} from '../../components/common';
+import { Icon, LinkButton } from '../../components/common';
+import { TrainingQuestionRecording, TrainingQuestionDetail } from './';
 import { BackNavigation } from '../../components/layout';
 
 import styles from './TrainingQuestion.scss';
@@ -31,12 +26,14 @@ class TrainingQuestionComponent extends Component<Props> {
   render() {
     const {
       match: {
-        params: { index }
+        params: { index, mode }
       },
       questions
     } = this.props;
     const questionIndex = parseInt(index);
     const question = questions && questions[questionIndex];
+
+    console.log(mode, question);
 
     return (
       <div className={styles.layout}>
@@ -48,15 +45,27 @@ class TrainingQuestionComponent extends Component<Props> {
           {question && (
             <div className={styles.content}>
               <div className={styles.alignment}>
-                <div>
+                {mode === 'detail' && (
+                  <TrainingQuestionDetail
+                    question={question}
+                    index={questionIndex}
+                  />
+                )}
+                {mode === 'recording' && (
+                  <TrainingQuestionRecording
+                    question={question}
+                    index={questionIndex}
+                  />
+                )}
+                {/* <div>
                   <h2>{question.question}</h2>
                   <LinkButton
                     className={classNames(mStyles['btn-large'], styles.button)}
-                    to={`/training/question/${questionIndex + 1}`}
+                    to={`/training/question/${questionIndex + 1}/info`}
                   >
                     <h5>next</h5>
                   </LinkButton>
-                </div>
+                </div> */}
               </div>
             </div>
           )}

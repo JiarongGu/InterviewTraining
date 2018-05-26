@@ -50,6 +50,7 @@ const mkdirNotExist = function (dir) {
 const initalizeFolders = function() {
   mkdirNotExist("./data");
   mkdirNotExist("./data/recordings");
+  mkdirNotExist("./data/jsons");
 }
 
 /**
