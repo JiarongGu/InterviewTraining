@@ -1,0 +1,36 @@
+.container {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    padding: 4rem 10%;
+}
+
+.layout {
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+.content {
+    position: relative;
+    display: table;
+    height: calc(100% - 8rem);
+    width: 100%;
+}
+
+.title {
+    border-bottom: solid black 2px;
+}
+
+.alignment {
+    display: table-cell;
+    vertical-align: middle;
+
+    > div {
+        display: table;
+        margin: auto;
+        left: 0;
+        right: 0;
+        position: relative;
+    }
+}

@@ -1,15 +1,25 @@
-import React, { Component } from "react";
-import { Link, withRouter } from "react-router-dom";
-import { connect } from "react-redux";
+import React, { Component } from 'react';
+import { Link, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-import { Card, Camera, Icon, LinkButton, Button } from "../../components/common";
+import {
+  Card,
+  Camera,
+  Icon,
+  LinkButton,
+  Button
+} from '../../components/common';
+import { BackNavigation } from '../../components/layout';
 
-import styles from "./TrainingQuestion.scss";
-import mStyles from "../../materialize/sass/materialize.scss";
-import classNames from "classnames";
-import question from "../../reducers/question";
+import styles from './TrainingQuestion.scss';
+import mStyles from '../../materialize/sass/materialize.scss';
+import classNames from 'classnames';
+import question from '../../reducers/question';
 
-type Props = {};
+type Props = {
+  match: { params: { index: string } },
+  questions: []
+};
 
 class TrainingQuestionComponent extends Component<Props> {
   props: Props;
@@ -19,24 +29,37 @@ class TrainingQuestionComponent extends Component<Props> {
   }
 
   render() {
-    // console.log("Training Question:: ", this.props);
-    // console.log(require('electron').remote);
-    const { match: { params: { index } }, questions } = this.props;
+    const {
+      match: {
+        params: { index }
+      },
+      questions
+    } = this.props;
     const questionIndex = parseInt(index);
     const question = questions && questions[questionIndex];
 
     return (
-      <div className={styles.container}>
-        <div className={styles.alignment}>
+      <div className={styles.layout}>
+        <BackNavigation />
+        <div className={styles.container}>
+          <div className={styles.title}>
+            <h1>Question {questionIndex + 1}</h1>
+          </div>
           {question && (
-            <div>
-              <h1>Question {questionIndex + 1}</h1>
-              <h2>{question.question}</h2>
+            <div className={styles.content}>
+              <div className={styles.alignment}>
+                <div>
+                  <h2>{question.question}</h2>
+                  <LinkButton
+                    className={classNames(mStyles['btn-large'], styles.button)}
+                    to={`/training/question/${questionIndex + 1}`}
+                  >
+                    <h5>next</h5>
+                  </LinkButton>
+                </div>
+              </div>
             </div>
           )}
-          <Button onClick={() => { this.props.history.goBack(); }}>
-            Back
-          </Button>
         </div>
       </div>
     );
