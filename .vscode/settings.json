@@ -15,5 +15,7 @@
     "npm-debug.log.*": true,
     "test/**/__snapshots__": true,
     "yarn.lock": true
-  }
+  },
+  "prettier.proseWrap": "never",
+  "prettier.singleQuote": true,
 }

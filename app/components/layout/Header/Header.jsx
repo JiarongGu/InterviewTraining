@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { NavBar, NavMenu, NavMenuItem, NavLogo, Icon } from '../common';
+import { NavBar, NavMenu, NavMenuItem, NavLogo, Icon } from '../../common';
 import { Link } from 'react-router-dom';
 import styles from './Header.scss';
 
