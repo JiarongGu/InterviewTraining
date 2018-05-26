@@ -9,10 +9,11 @@ import mStyles from '../../materialize/sass/materialize.scss';
 import classNames from 'classnames';
 
 type Props = {
-  close: () => {}
+  close?: () => {}
 };
 
 type State = {
+  recording: boolean,
   error: {}
 };
 
@@ -21,29 +22,44 @@ export class TrainingQuestionCamera extends Component<Props> {
     super(props);
 
     this.state = {
+      recording: false,
       error: undefined
     };
   }
 
   render() {
-    // const {
-    //   question: { id, question, takes, time },
-    //   index
-    // } = this.props;
+    const { recording, error } = this.state;
 
     return (
       <Modal>
         <div className={styles.container}>
-          <Camera
-            height={810}
-            width={1596}
-            output={'./data/recordings'}
-            onError={error => this.setState({ error })}
-          />
-          <Modal>
-              {!this.state.error && <CountDown time={10} interval={1000} />}
-              {this.state.error && <div>Error : {this.state.error.name}</div>}
-          </Modal>
+          {recording && (
+            <Camera
+              output={'./data/recordings'}
+              onError={error => this.setState({ error })}
+              styles={{ video: styles.video }}
+              autoPlay
+            />
+          )}
+          {!recording && (
+            <Modal>
+              {!error && (
+                <div className={styles.container}>
+                  <div className={styles.alignment}>
+                    <div>
+                      <CountDown
+                        time={3}
+                        interval={1000}
+                        onComplete={() => this.setState({ recording: true })}
+                        className={styles.countDown}
+                      />
+                    </div>
+                  </div>
+                </div>
+              )}
+              {error && <div>Error : {this.state.error.name}</div>}
+            </Modal>
+          )}
         </div>
       </Modal>
     );

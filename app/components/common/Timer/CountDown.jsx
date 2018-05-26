@@ -8,7 +8,9 @@ import { Timer } from '../../../utils';
 type Props = {
   time: number,
   interval: number,
-  complete?: () => void
+  text?: string,
+  onComplete?: () => void,
+  className?: string
 };
 
 type State = {
@@ -22,7 +24,7 @@ export class CountDown extends Component<Props> {
 
     this.state = {
       count: 0,
-      timer: {}
+      timer: undefined
     };
 
     this.countDown = this.countDown.bind(this);
@@ -30,10 +32,13 @@ export class CountDown extends Component<Props> {
 
   countDown() {
     const nextCount = this.props.time - this.state.timer.ticks;
+
     this.setState({ count: nextCount }, () => {
       if(this.state.count <= 0)
+      {
         this.state.timer.stop();
-        if(this.props.complete) complete();
+        if(this.props.onComplete) this.props.onComplete();
+      }
     });
   }
 
@@ -51,9 +56,12 @@ export class CountDown extends Component<Props> {
   }
 
   render() {
+    const { text, className } = this.props;
+
     return (
-      <div className={styles.container}>
-        Timer {this.state.count}
+      <div className={className}>
+        {text && <span>text</span>}
+        {this.state.count}
       </div>
     );
   }
