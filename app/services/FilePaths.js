@@ -4,6 +4,7 @@ export class FilePaths {
   constructor() {
     const app = require('electron').remote.app;
     const appRoot = app.getAppPath();
+    
     const mkdirNotExist = function(dir) {
       if (!fs.existsSync(dir)) {
         fs.mkdirSync(dir);

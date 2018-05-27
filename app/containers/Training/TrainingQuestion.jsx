@@ -11,7 +11,8 @@ import {
   BackNavigationToTraining,
   TrainingSectionClose
 } from '../../components/layout';
-import { TrainingExample, TrainingGallery } from './';
+import { TrainingExample } from './TrainingExample';
+import { TrainingGallery } from './TrainingGallery';
 
 import styles from './TrainingQuestion.scss';
 import mStyles from '../../materialize/sass/materialize.scss';

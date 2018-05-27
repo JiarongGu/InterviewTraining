@@ -16,8 +16,7 @@ export class TrainingQuestionDetail extends Component<Props> {
   render() {
     const {
       question: { id, question, takes, time },
-      index,
-      children
+      index
     } = this.props;
     return (
       <div>
@@ -40,7 +39,7 @@ export class TrainingQuestionDetail extends Component<Props> {
           >
             View Question
           </LinkButton>
-          {children}
+          {this.props.children}
         </div>
       </div>
     );

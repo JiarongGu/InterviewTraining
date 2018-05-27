@@ -15,8 +15,6 @@ type State = {
 }
 
 export class TrainingGallery extends Component<Props> {
-  props: Props;
-
   constructor(props) {
     super(props);
 
