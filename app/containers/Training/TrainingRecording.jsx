@@ -12,7 +12,8 @@ import classNames from 'classnames';
 import { RecordingService, Recording } from '../../services';
 
 type Props = {
-  match: { params: { index: string, id: string } }
+  match: { params: { index: string, id: string } },
+  questions: []
 };
 
 type State = {
@@ -53,7 +54,7 @@ class TrainingRecordingComponent extends Component<Props, State> {
     this.onTimeUpdate = this.onTimeUpdate.bind(this);
     this.onEnded = this.onEnded.bind(this);
   }
-  
+
   componentDidMount() {
     const video = this.videoRef.current;
     video.volume = 1;
@@ -92,8 +93,11 @@ class TrainingRecordingComponent extends Component<Props, State> {
       seek.value = video.currentTime / this.state.recording.duration * 100;
     });
 
-    if(video.duration && video.duration != Infinity && video.duration != this.state.recording.duration)
-    {
+    if (
+      video.duration &&
+      video.duration != Infinity &&
+      video.duration != this.state.recording.duration
+    ) {
       console.log('Recording duration mismatch.');
       this.state.recording.duration = video.duration;
       this.state.recordingService.update(this.state.recording);
@@ -105,7 +109,14 @@ class TrainingRecordingComponent extends Component<Props, State> {
   }
 
   render() {
-    const { match: { params: { index, id } } } = this.props;
+    const {
+      questions,
+      match: {
+        params: { index, id }
+      }
+    } = this.props;
+    const finished = parseInt(index) + 1 >= questions.length;
+
     return (
       <div className={styles.layout}>
         <BackNavigation />
@@ -149,9 +160,14 @@ class TrainingRecordingComponent extends Component<Props, State> {
           <LinkButton to={`/training/question/${parseInt(index)}/recording`}>
             Retake
           </LinkButton>
-          <LinkButton to={`/training/question/${parseInt(index)+1}/detail`}>
-            Next
-          </LinkButton>
+          {!finished && (
+            <LinkButton to={`/training/question/${parseInt(index) + 1}/detail`}>
+              Next
+            </LinkButton>
+          )}
+          {finished && (
+            <LinkButton to={`/training/question/start`}>Finished</LinkButton>
+          )}
         </div>
       </div>
     );
@@ -164,4 +180,6 @@ function mapStateToProps(state) {
   };
 }
 
-export const TrainingRecording = withRouter(TrainingRecordingComponent);
+export const TrainingRecording = withRouter(
+  connect(mapStateToProps)(TrainingRecordingComponent)
+);
