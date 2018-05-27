@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { Icon, LinkButton } from '../../components/common';
 import { TrainingQuestionRecording, TrainingQuestionDetail } from './TrainingQuestionComponents';
-import { BackNavigationToTraining } from '../../components/layout';
+import { BackNavigationToTraining, TrainingSectionClose } from '../../components/layout';
 
 import styles from './TrainingQuestion.scss';
 import mStyles from '../../materialize/sass/materialize.scss';
@@ -36,6 +36,7 @@ class TrainingQuestionComponent extends Component<Props> {
     return (
       <div className={styles.layout}>
         <BackNavigationToTraining />
+        <TrainingSectionClose />
         <div className={styles.container}>
           <div className={styles.title}>
             <h1>Question {questionIndex + 1}</h1>

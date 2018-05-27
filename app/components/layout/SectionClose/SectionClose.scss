@@ -1,0 +1,48 @@
+@import '../../../materialize/sass/components/color-variables';
+@import '../../../materialize/sass/components/color-classes';
+@import '../../../materialize/sass/components/variables';
+.container {
+  position: absolute;
+  padding: 1.5rem 2rem;
+  z-index: 1000;
+  right: 0;
+}
+
+.close-button {
+  &:hover,
+  &:focus {
+    color: #444 !important;
+  }
+}
+
+.modal-content {
+  background-color: #fafafa;
+  padding: 1.2rem 2rem;
+  border-radius: 2px;
+  box-shadow: 0 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12), 0 11px 15px -7px rgba(0, 0, 0, 0.2);
+  width: 24rem;
+}
+
+.modal-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.modal-message {
+  margin-top: 0.5rem;
+  height: 6rem;
+  color: color('grey', 'darken-1');
+}
+
+.modal-controls {
+  position: relative;
+  text-align: right;
+  width: 100%;
+
+  >a {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: color('teal', 'lighten-1');
+    padding: 0 0.6rem;
+  }
+}

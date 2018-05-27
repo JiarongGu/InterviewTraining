@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Card, Camera, Icon, LinkButton } from "../../components/common";
+import { TrainingSectionClose } from '../../components/layout';
 
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
@@ -30,6 +31,7 @@ class TrainingStartComponent extends Component<Props> {
 
     return (
       <div className={styles.container} data-tid="container">
+        <TrainingSectionClose />
         {!loading && (
           <div className={styles.alignment}>
             <div>

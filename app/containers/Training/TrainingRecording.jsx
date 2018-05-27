@@ -3,7 +3,7 @@ import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { Icon, LinkButton } from '../../components/common';
-import { BackNavigation } from '../../components/layout';
+import { BackNavigation, TrainingSectionClose } from '../../components/layout';
 import { TrainingRecordingRetake } from './TrainingRecordingComponents';
 
 import styles from './TrainingRecording.scss';
@@ -123,8 +123,9 @@ class TrainingRecordingComponent extends Component<Props, State> {
     return (
       <div className={styles.layout}>
         <BackNavigation />
+        <TrainingSectionClose />
         <div className={styles['back-button-background']} />
-
+        <div className={styles['close-button-background']} />
         <video
           ref={this.videoRef}
           className={styles.video}

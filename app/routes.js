@@ -11,7 +11,6 @@ export default () => (
     <Switch>
       <Route path="/training/question/:index/recording/:id/:mode(retake|review)" component={TrainingRecording} />
       <Route path="/training/question/:index/:mode(detail|recording)" component={TrainingQuestion} />
-      <Route path="/training/start" component={TrainingStart} />
       <Route path="/counter" component={CounterPage} />
       <Route path="/training" component={TrainingStart} />
       <Route path="/" component={Home} />

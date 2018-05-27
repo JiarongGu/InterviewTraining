@@ -1,8 +1,9 @@
 .container {
-    position: relative;
+    position: absolute;
     display: table;
     height: 100%;
     width: 100%;
+    top: 64px;
 }
 
 .alignment {
