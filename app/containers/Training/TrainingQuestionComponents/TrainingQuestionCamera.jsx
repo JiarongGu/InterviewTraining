@@ -8,21 +8,25 @@ import {
   Modal,
   Camera,
   Icon
-} from '../../components/common';
+} from '../../../components/common';
 import { TrainingQuestionCountDown } from './TrainingQuestionCountDown';
 
 import styles from './TrainingQuestionCamera.scss';
-import mStyles from '../../materialize/sass/materialize.scss';
+import mStyles from '../../../materialize/sass/materialize.scss';
 import classNames from 'classnames';
+import { FilePaths, RecordingService } from '../../../services';
 
 type Props = {
-  close?: () => {}
+  history?: object,
+  index: number
 };
 
 type State = {
   mode: string,
   error: {},
-  question: { id: string, question: string, takes: number, time: number }
+  question: { id: string, question: string, takes: number, time: number },
+  filePaths: FilePaths,
+  recordingService: RecordingService
 };
 
 const COUNT_MODE = 'COUNT_MODE';
@@ -30,15 +34,23 @@ const ERROR_MODE = 'ERROR_MODE';
 const RECORDING_MODE = 'RECORDING_MODE';
 const REVIEW_MODE = 'REVIEW_MODE';
 
-export class TrainingQuestionCamera extends Component<Props, State> {
+function getRecordingInfo(filePath, questionId) {
+  var filename = filePath.replace(/^.*[\\\/]/, '');
+  var duration = parseFloat(filename.split('.')[1]) / 1000;
+  var id = filename.split('.')[0];
+  return { id, filePath, duration, questionId };
+}
+
+class TrainingQuestionCameraComponent extends Component<Props, State> {
   constructor(props) {
     super(props);
 
     this.state = {
       mode: COUNT_MODE,
       error: undefined,
-      hover: false,
-      question: {}
+      question: {},
+      filePaths: new FilePaths(),
+      recordingService: new RecordingService()
     };
 
     this.stopRecording = this.stopRecording.bind(this);
@@ -49,8 +61,18 @@ export class TrainingQuestionCamera extends Component<Props, State> {
   }
 
   stopRecording(event) {
+    const {
+      question: { id },
+      index,
+      history
+    } = this.props;
+    const { recordingService } = this.state;
     this.cameraRef.current.stopRecording().then(filePath => {
-      console.log(filePath);
+      const recording = getRecordingInfo(filePath, id);
+      recordingService.insert(recording);
+      history.push(
+        `/training/question/${index}/recording/${recording.id}`
+      );
     });
   }
 
@@ -64,13 +86,12 @@ export class TrainingQuestionCamera extends Component<Props, State> {
   render() {
     const { mode, error } = this.state;
     const { question } = this.props;
-
     return (
       <Modal>
         <div className={styles.container}>
           <Camera
             ref={this.cameraRef}
-            output={'./cache/recordings'}
+            output={this.state.filePaths.dirDataRecordings}
             onError={error => this.setState({ error, mode: ERROR_MODE })}
             styles={{ video: styles.video }}
           />
@@ -101,3 +122,7 @@ export class TrainingQuestionCamera extends Component<Props, State> {
     );
   }
 }
+
+export const TrainingQuestionCamera = withRouter(
+  TrainingQuestionCameraComponent
+);

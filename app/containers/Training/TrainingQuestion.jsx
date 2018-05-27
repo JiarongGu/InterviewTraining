@@ -3,8 +3,8 @@ import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { Icon, LinkButton } from '../../components/common';
-import { TrainingQuestionRecording, TrainingQuestionDetail } from './';
-import { BackNavigation } from '../../components/layout';
+import { TrainingQuestionRecording, TrainingQuestionDetail } from './TrainingQuestionComponents';
+import { BackNavigationToTraining } from '../../components/layout';
 
 import styles from './TrainingQuestion.scss';
 import mStyles from '../../materialize/sass/materialize.scss';
@@ -33,11 +33,9 @@ class TrainingQuestionComponent extends Component<Props> {
     const questionIndex = parseInt(index);
     const question = questions && questions[questionIndex];
 
-    console.log(mode, question);
-
     return (
       <div className={styles.layout}>
-        <BackNavigation />
+        <BackNavigationToTraining />
         <div className={styles.container}>
           <div className={styles.title}>
             <h1>Question {questionIndex + 1}</h1>
@@ -57,15 +55,6 @@ class TrainingQuestionComponent extends Component<Props> {
                     index={questionIndex}
                   />
                 )}
-                {/* <div>
-                  <h2>{question.question}</h2>
-                  <LinkButton
-                    className={classNames(mStyles['btn-large'], styles.button)}
-                    to={`/training/question/${questionIndex + 1}/info`}
-                  >
-                    <h5>next</h5>
-                  </LinkButton>
-                </div> */}
               </div>
             </div>
           )}

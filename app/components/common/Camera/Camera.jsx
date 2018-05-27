@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import uuidv4 from 'uuid/v4';
 
-import RecordRTC from 'recordrtc';
+import { RecordRTCPromisesHandler } from 'recordrtc';
 import fs from 'fs';
 
 import styles from './Camera.scss';
@@ -13,7 +13,7 @@ type Props = {
   height?: number,
   width?: number,
   output: string,
-  onSaved?: filepath => void,
+  onSaved?: filePath => void,
   onError?: error => void,
   styles: { video: string },
   onMouseEnter?: event => void,
@@ -25,7 +25,8 @@ type State = {
   src: object,
   uploadSuccess: object,
   uploading: boolean,
-  stream: object
+  stream: object,
+  startTime?: Date
 };
 
 export class Camera extends Component<Props, State> {
@@ -38,7 +39,8 @@ export class Camera extends Component<Props, State> {
       uploadSuccess: null,
       uploading: false,
       styles: {},
-      stream: undefined
+      stream: undefined,
+      startTime: undefined
     };
 
     this.startRecording = this.startRecording.bind(this);
@@ -49,7 +51,7 @@ export class Camera extends Component<Props, State> {
   componentDidMount() {
     const recordingOptions = {
       mimeType: 'video/webm', // or video/webm\;codecs=h264 or video/webm\;codecs=vp9
-      bitsPerSecond: 1024000 // if this line is provided, skip above two
+      bitsPerSecond: 2048000 // if this line is provided, skip above two
     };
 
     const videoNode = this.videoRef.current;
@@ -66,8 +68,8 @@ export class Camera extends Component<Props, State> {
         this.setState(
           {
             src: URL.createObjectURL(stream),
-            recordVideo: RecordRTC(stream, recordingOptions),
-            stream: stream,
+            recordVideo: new RecordRTCPromisesHandler(stream, recordingOptions),
+            stream: stream
           },
           () => {
             videoNode.pause();
@@ -82,35 +84,42 @@ export class Camera extends Component<Props, State> {
   }
 
   startRecording() {
-    this.state.recordVideo.startRecording();
-    this.videoRef.current.play();
-  }
+    const video = this.videoRef.current;
+    this.state.recordVideo.startRecording().then(() => {
+      this.setState({ startTime: Date.now() });
+      this.videoRef.current.play();
+    });
+  } 
 
   stopRecording() {
     const videoNode = this.videoRef.current;
     const output = this.props.output;
 
     const promise = new Promise((resolve, reject) => {
-      this.state.recordVideo.stopRecording(() => {
+      this.state.recordVideo.stopRecording().then(() => {
         videoNode.pause();
-        const blob = this.state.recordVideo.getBlob();
 
+        const blob = this.state.recordVideo.getBlob();
         const fileReader = new FileReader();
+        const duration = Date.now() - this.state.startTime;
+
         fileReader.onload = function() {
           const buffer = new Buffer(fileReader.result);
-          const filePath = `${output}/${uuidv4()}.webm`;
+          const filePath = `${output}/${uuidv4()}.${duration}.webm`;
+
           fs.writeFile(filePath, buffer, err => {
-            if(resolve) resolve(filePath);
+            if (resolve) resolve(filePath);
 
             if (err) {
               if (this.props.onError) {
                 this.props.onError(err);
               }
-              if(reject) reject(err);
+              if (reject) reject(err);
               return;
             }
           });
         };
+
         fileReader.readAsArrayBuffer(blob);
       });
     });
@@ -119,9 +128,10 @@ export class Camera extends Component<Props, State> {
   }
 
   componentWillUnmount() {
-    if(this.state.stream)
-    {
-      this.state.stream.getTracks().forEach(track => { track.stop();});
+    if (this.state.stream) {
+      this.state.stream.getTracks().forEach(track => {
+        track.stop();
+      });
     }
   }
 

@@ -3,12 +3,13 @@ import React from "react";
 import { Switch, Route } from "react-router";
 import App from "./containers/App";
 import { Home } from "./containers/Home";
-import { TrainingStart, TrainingQuestion } from "./containers/Training";
+import { TrainingStart, TrainingQuestion, TrainingRecording } from "./containers/Training";
 import CounterPage from "./containers/CounterPage";
 
 export default () => (
   <App>
     <Switch>
+      <Route path="/training/question/:index/recording/:id" component={TrainingRecording} />
       <Route path="/training/question/:index/:mode(detail|recording)" component={TrainingQuestion} />
       <Route path="/training/start" component={TrainingStart} />
       <Route path="/counter" component={CounterPage} />

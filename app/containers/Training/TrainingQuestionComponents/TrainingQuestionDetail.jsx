@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
-import { LinkButton } from '../../components/common';
+import { LinkButton } from '../../../components/common';
 
-import styles from './TrainingQuestion.scss';
-import mStyles from '../../materialize/sass/materialize.scss';
+import styles from './TrainingQuestionDetail.scss';
+import mStyles from '../../../materialize/sass/materialize.scss';
 import classNames from 'classnames';
 
 type Props = {

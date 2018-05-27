@@ -3,3 +3,9 @@
     padding: 2rem;
     z-index: 1000;
 }
+
+.back-button {
+    &:hover, &:focus {
+        color: #444 !important;
+    }
+}

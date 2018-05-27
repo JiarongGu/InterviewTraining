@@ -1,2 +1,2 @@
 export { Header } from './Header';
-export { BackNavigation } from './BackNavigation';
+export { BackNavigation, BackNavigationToTraining } from './BackNavigation';

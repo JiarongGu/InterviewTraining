@@ -1,10 +1,12 @@
 import low from "lowdb";
 import FileSync from "lowdb/adapters/FileSync";
 import { Random } from "../utils";
+import { FilePaths } from './FilePaths';
 
 export class QuestionService {
   constructor() {
-    this.adapter = new FileSync("./data/jsons/questions.json");
+    const filePaths = new FilePaths();
+    this.adapter = new FileSync(`${filePaths.dirDataJsons}/questions.json`);
     this.db = low(this.adapter);
 
     this.db

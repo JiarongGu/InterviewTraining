@@ -13,6 +13,7 @@
 import { app, BrowserWindow } from 'electron';
 import MenuBuilder from './menu';
 import fs from 'fs';
+import { FilePaths } from './services';
 
 let mainWindow = null;
 
@@ -41,21 +42,6 @@ const installExtensions = async () => {
     .catch(console.log);
 };
 
-const mkdirNotExist = function (dir) {
-  if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir);
-  };
-}
-
-const initalizeFolders = function() {
-  mkdirNotExist("./cache");
-  mkdirNotExist("./cache/recordings");
-
-  mkdirNotExist("./data");
-  mkdirNotExist("./data/recordings");
-  mkdirNotExist("./data/jsons");
-}
-
 /**
  * Add event listeners...
  */
@@ -72,8 +58,6 @@ app.on('ready', async () => {
   if (process.env.NODE_ENV === 'development' || process.env.DEBUG_PROD === 'true') {
     await installExtensions();
   }
-
-  initalizeFolders();
   
   mainWindow = new BrowserWindow({
     show: false,

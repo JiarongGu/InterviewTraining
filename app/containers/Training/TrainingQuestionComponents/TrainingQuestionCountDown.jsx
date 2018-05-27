@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { CountDown, Modal} from '../../components/common';
+import { CountDown, Modal} from '../../../components/common';
 
 import styles from './TrainingQuestionCountDown.scss';
-import mStyles from '../../materialize/sass/materialize.scss';
+import mStyles from '../../../materialize/sass/materialize.scss';
 import classNames from 'classnames';
 
 type Props = {

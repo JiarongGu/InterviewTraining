@@ -13,13 +13,13 @@ type Props = {
   className?: string
 };
 
-export class BackNavigationComponent extends React.Component<Props> {
+class BackNavigationToTrainingComponent extends React.Component<Props> {
   render() {
     return (
       <div className={classNames(styles.container, this.props.className)}>
         <a
           onClick={() => {
-            this.props.history.goBack();
+            this.props.history.push('/training/start');
           }}
         >
           <Icon icon={'chevron-left'} size={'3x'} className={classNames(mStyles['grey-text'], mStyles['text-darken-4'], styles['back-button'])} />
@@ -29,4 +29,4 @@ export class BackNavigationComponent extends React.Component<Props> {
   }
 }
 
-export const BackNavigation = withRouter(BackNavigationComponent);
+export const BackNavigationToTraining= withRouter(BackNavigationToTrainingComponent);

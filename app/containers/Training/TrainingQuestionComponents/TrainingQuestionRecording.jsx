@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { Button, CountDown } from '../../components/common';
+import { Button, CountDown } from '../../../components/common';
 
-import styles from './TrainingQuestion.scss';
-import mStyles from '../../materialize/sass/materialize.scss';
+import styles from './TrainingQuestionRecording.scss';
+import mStyles from '../../../materialize/sass/materialize.scss';
 import classNames from 'classnames';
 
 import { TrainingQuestionCamera } from './TrainingQuestionCamera';
@@ -29,17 +29,17 @@ export class TrainingQuestionRecording extends Component<Props> {
   }
 
   render() {
-    const {
-      question: { id, question, takes, time },
-      index
-    } = this.props;
+    const { question, index } = this.props;
 
     return (
       <div>
         {this.state.recording && (
-          <TrainingQuestionCamera question={this.props.question} />
+          <TrainingQuestionCamera
+            question={question}
+            index={index}
+          />
         )}
-        <h3>{question}</h3>
+        <h3>{question.question}</h3>
         <div className={styles.control}>
           <Button
             className={classNames(mStyles['btn-large'], styles.button)}
