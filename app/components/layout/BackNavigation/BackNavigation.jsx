@@ -1,4 +1,3 @@
-// @flow
 import * as React from 'react';
 import { withRouter } from 'react-router-dom';
 
@@ -13,7 +12,7 @@ type Props = {
   className?: string
 };
 
-export class BackNavigationComponent extends React.Component<Props> {
+class BackNavigationComponent extends React.Component<Props> {
   render() {
     return (
       <div className={classNames(styles.container, this.props.className)}>
@@ -22,7 +21,15 @@ export class BackNavigationComponent extends React.Component<Props> {
             this.props.history.goBack();
           }}
         >
-          <Icon icon={'chevron-left'} size={'3x'} className={classNames(mStyles['grey-text'], mStyles['text-darken-4'], styles['back-button'])} />
+          <Icon
+            icon={'chevron-left'}
+            size={'3x'}
+            className={classNames(
+              mStyles['grey-text'],
+              mStyles['text-darken-4'],
+              styles['back-button']
+            )}
+          />
         </a>
       </div>
     );
