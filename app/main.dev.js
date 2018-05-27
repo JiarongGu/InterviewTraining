@@ -48,6 +48,9 @@ const mkdirNotExist = function (dir) {
 }
 
 const initalizeFolders = function() {
+  mkdirNotExist("./cache");
+  mkdirNotExist("./cache/recordings");
+
   mkdirNotExist("./data");
   mkdirNotExist("./data/recordings");
   mkdirNotExist("./data/jsons");
@@ -74,7 +77,7 @@ app.on('ready', async () => {
   
   mainWindow = new BrowserWindow({
     show: false,
-    width: 1366,
+    width: 1280,
     height: 800,
     resizable: false
   });

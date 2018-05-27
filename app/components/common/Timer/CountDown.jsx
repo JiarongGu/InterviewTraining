@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 import classNames from 'classnames';
 import mStyles from '../../../materialize/sass/materialize.scss';
-import styles from './CountDown.scss';
 import { Timer } from '../../../utils';
 
 type Props = {
@@ -18,7 +17,7 @@ type State = {
   count: number
 };
 
-export class CountDown extends Component<Props> {
+export class CountDown extends Component<Props, State> {
   constructor(props) {
     super(props);
 

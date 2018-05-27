@@ -1,4 +1,6 @@
 export class Timer {
+  ticks: number;
+  
   constructor(tick: () => void, interval) {
     let _running = false;
     let _tick = tick;

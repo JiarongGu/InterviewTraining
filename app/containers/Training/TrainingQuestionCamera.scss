@@ -27,9 +27,25 @@
   height: calc(100vh - 64px);
 }
 
+.timer {
+  position: absolute;
+  right: 0;
+  padding: 0.5rem 1.5rem;
+  width: 14rem;
+  font-size: 3rem;
+  font-weight: 500;
+  background-color: rgba(255,255,255,0.6);
+  
+  >span {
+    text-align: right;
+    width: 7.8rem;
+    display: inline-block;
+  }
+}
+
 .stop-button {
   position: absolute;
-  bottom: 5rem;
+  bottom: 2rem;
   margin: auto;
   left: 0;
   right: 0;
@@ -48,6 +64,7 @@
 
     &:hover, &:focus {
       color: color("materialize-red", "lighten-1");
+      cursor: pointer;
     }
 
     &:active {

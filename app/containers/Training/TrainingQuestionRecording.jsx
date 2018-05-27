@@ -36,10 +36,15 @@ export class TrainingQuestionRecording extends Component<Props> {
 
     return (
       <div>
-        { this.state.recording && <TrainingQuestionCamera /> }
+        {this.state.recording && (
+          <TrainingQuestionCamera question={this.props.question} />
+        )}
         <h3>{question}</h3>
         <div className={styles.control}>
-          <Button className={classNames(mStyles['btn-large'], styles.button)} onClick={() => this.setState({ recording: true })}>
+          <Button
+            className={classNames(mStyles['btn-large'], styles.button)}
+            onClick={() => this.setState({ recording: true })}
+          >
             Start Recording
           </Button>
         </div>

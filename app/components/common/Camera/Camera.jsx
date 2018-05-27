@@ -24,7 +24,8 @@ type State = {
   recordVideo: object,
   src: object,
   uploadSuccess: object,
-  uploading: boolean
+  uploading: boolean,
+  stream: object
 };
 
 export class Camera extends Component<Props, State> {
@@ -36,7 +37,8 @@ export class Camera extends Component<Props, State> {
       src: null,
       uploadSuccess: null,
       uploading: false,
-      styles: {}
+      styles: {},
+      stream: undefined
     };
 
     this.startRecording = this.startRecording.bind(this);
@@ -47,7 +49,7 @@ export class Camera extends Component<Props, State> {
   componentDidMount() {
     const recordingOptions = {
       mimeType: 'video/webm', // or video/webm\;codecs=h264 or video/webm\;codecs=vp9
-      bitsPerSecond: 512000 // if this line is provided, skip above two
+      bitsPerSecond: 1024000 // if this line is provided, skip above two
     };
 
     const videoNode = this.videoRef.current;
@@ -56,7 +58,7 @@ export class Camera extends Component<Props, State> {
     navigator.mediaDevices
       .getUserMedia({
         video: {
-          aspectRatio: { ideal: 1.9237 }
+          aspectRatio: { ideal: 1.802259887 }
         },
         audio: true
       })
@@ -64,7 +66,8 @@ export class Camera extends Component<Props, State> {
         this.setState(
           {
             src: URL.createObjectURL(stream),
-            recordVideo: RecordRTC(stream, recordingOptions)
+            recordVideo: RecordRTC(stream, recordingOptions),
+            stream: stream,
           },
           () => {
             videoNode.pause();
@@ -113,6 +116,13 @@ export class Camera extends Component<Props, State> {
     });
 
     return promise;
+  }
+
+  componentWillUnmount() {
+    if(this.state.stream)
+    {
+      this.state.stream.getTracks().forEach(track => { track.stop();});
+    }
   }
 
   render() {
