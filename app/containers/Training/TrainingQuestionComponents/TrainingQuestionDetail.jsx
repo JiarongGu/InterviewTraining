@@ -38,6 +38,9 @@ export class TrainingQuestionDetail extends Component<Props> {
           >
             View Question
           </LinkButton>
+          <div>
+            <a>Watch Examples</a>
+          </div>
         </div>
       </div>
     );

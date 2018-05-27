@@ -31,7 +31,12 @@ export class SectionClose extends React.Component<Props, State> {
   }
 
   openModal() {
-    this.setState({ isModalOpen: true });
+    if(this.props.message) {
+      this.setState({ isModalOpen: true });
+    }
+    else{
+      this.onConfirm();
+    }
   }
 
   onConfirm() {
