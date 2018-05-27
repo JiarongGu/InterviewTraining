@@ -173,8 +173,7 @@ export default merge.smart(baseConfig, {
     new ExtractTextPlugin('style.css'),
     
     new CopyWebpackPlugin([
-      { from: './resources/font-awesome', to: './font-awesome' }, 
-      { from: './resources/patch', to: './patch' }
+      { from: './resources/font-awesome', to: './font-awesome' }
     ]),
 
     new BundleAnalyzerPlugin({
