@@ -31,7 +31,7 @@ export class TrainingRecordingRetake extends Component<Props, State> {
           <Modal onClick={() => {this.setState({ saveConfirmed: true })}}>
             <div className={styles['modal-content']}>
               <Icon icon={'check-square'} size={'3x'} />
-              <span>This task has been successfully saved!</span>
+              <span>This take has been successfully saved!</span>
             </div>
           </Modal>
         )}

@@ -11,7 +11,7 @@ import {
   BackNavigationToTraining,
   TrainingSectionClose
 } from '../../components/layout';
-import { TrainingExample } from './TrainingExample';
+import { TrainingExample, TrainingGallery } from './';
 
 import styles from './TrainingQuestion.scss';
 import mStyles from '../../materialize/sass/materialize.scss';
@@ -57,6 +57,7 @@ class TrainingQuestionComponent extends Component<Props> {
                     index={questionIndex}
                   >
                     <TrainingExample />
+                    <TrainingGallery />
                   </TrainingQuestionDetail>
                 )}
                 {mode === 'recording' && (

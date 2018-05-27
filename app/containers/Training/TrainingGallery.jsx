@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { SectionClose } from '../../components/layout';
 
-import styles from './TrainingExample.scss';
+import styles from './TrainingGallery.scss';
 import mStyles from '../../materialize/sass/materialize.scss';
 import classNames from 'classnames';
 
@@ -14,7 +14,7 @@ type State = {
   isModalOpen: boolean
 }
 
-export class TrainingExample extends Component<Props> {
+export class TrainingGallery extends Component<Props> {
   props: Props;
 
   constructor(props) {
@@ -33,9 +33,9 @@ export class TrainingExample extends Component<Props> {
 
   render() {
     return (
-      <div className={styles.container}>
+      <div>
         <div className={styles['view-link']}>
-          <a onClick={this.openModal}>Watch Examples</a>
+          <a onClick={this.openModal}>View Saved Takes</a>
         </div>
       </div>
     );
