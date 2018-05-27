@@ -8,14 +8,16 @@ import classNames from 'classnames';
 
 type Props = {
   question: { id: string, question: string, takes: number, time: number },
-  index: number
+  index: number,
+  children?: React.ReactNode
 };
 
 export class TrainingQuestionDetail extends Component<Props> {
   render() {
     const {
       question: { id, question, takes, time },
-      index
+      index,
+      children
     } = this.props;
     return (
       <div>
@@ -38,9 +40,7 @@ export class TrainingQuestionDetail extends Component<Props> {
           >
             View Question
           </LinkButton>
-          <div>
-            <a>Watch Examples</a>
-          </div>
+          {children}
         </div>
       </div>
     );

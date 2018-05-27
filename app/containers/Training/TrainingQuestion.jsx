@@ -3,8 +3,15 @@ import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { Icon, LinkButton } from '../../components/common';
-import { TrainingQuestionRecording, TrainingQuestionDetail } from './TrainingQuestionComponents';
-import { BackNavigationToTraining, TrainingSectionClose } from '../../components/layout';
+import {
+  TrainingQuestionRecording,
+  TrainingQuestionDetail
+} from './TrainingQuestionComponents';
+import {
+  BackNavigationToTraining,
+  TrainingSectionClose
+} from '../../components/layout';
+import { TrainingExample } from './TrainingExample';
 
 import styles from './TrainingQuestion.scss';
 import mStyles from '../../materialize/sass/materialize.scss';
@@ -48,7 +55,9 @@ class TrainingQuestionComponent extends Component<Props> {
                   <TrainingQuestionDetail
                     question={question}
                     index={questionIndex}
-                  />
+                  >
+                    <TrainingExample />
+                  </TrainingQuestionDetail>
                 )}
                 {mode === 'recording' && (
                   <TrainingQuestionRecording
