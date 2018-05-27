@@ -32,7 +32,6 @@ type State = {
 const COUNT_MODE = 'COUNT_MODE';
 const ERROR_MODE = 'ERROR_MODE';
 const RECORDING_MODE = 'RECORDING_MODE';
-const REVIEW_MODE = 'REVIEW_MODE';
 
 function getRecordingInfo(filePath, questionId) {
   var filename = filePath.replace(/^.*[\\\/]/, '');
@@ -71,7 +70,7 @@ class TrainingQuestionCameraComponent extends Component<Props, State> {
       const recording = getRecordingInfo(filePath, id);
       recordingService.insert(recording);
       history.push(
-        `/training/question/${index}/recording/${recording.id}`
+        `/training/question/${index}/recording/${recording.id}/retake`
       );
     });
   }
@@ -112,7 +111,6 @@ class TrainingQuestionCameraComponent extends Component<Props, State> {
               </div>
             </div>
           </div>
-          {mode == REVIEW_MODE && ''}
           {mode == ERROR_MODE && ''}
           {mode == COUNT_MODE && (
             <TrainingQuestionCountDown onComplete={this.onCountDownCompleted} />

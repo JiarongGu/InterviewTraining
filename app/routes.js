@@ -9,7 +9,7 @@ import CounterPage from "./containers/CounterPage";
 export default () => (
   <App>
     <Switch>
-      <Route path="/training/question/:index/recording/:id" component={TrainingRecording} />
+      <Route path="/training/question/:index/recording/:id/:mode(retake|review)" component={TrainingRecording} />
       <Route path="/training/question/:index/:mode(detail|recording)" component={TrainingQuestion} />
       <Route path="/training/start" component={TrainingStart} />
       <Route path="/counter" component={CounterPage} />

@@ -7,7 +7,8 @@ import mStyles from '../../../materialize/sass/materialize.scss';
 import { ModalOverLay } from './ModalOverLay';
 
 type Props = {
-    children: React.ReactNode
+    children: React.ReactNode,
+    onClick?: (event) => void
 };
 
 export class Modal extends React.Component<Props> {
@@ -16,7 +17,7 @@ export class Modal extends React.Component<Props> {
     render() {
         return (
             <ModalOverLay>
-                <div className={styles.container}>
+                <div className={styles.container} onClick={this.props.onClick}>
                     <div className={styles.alignment}>
                         {this.props.children}
                     </div>

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import { Icon, LinkButton } from '../../components/common';
 import { BackNavigation } from '../../components/layout';
+import { TrainingRecordingRetake } from './TrainingRecordingComponents';
 
 import styles from './TrainingRecording.scss';
 import mStyles from '../../materialize/sass/materialize.scss';
@@ -12,7 +13,7 @@ import classNames from 'classnames';
 import { RecordingService, Recording } from '../../services';
 
 type Props = {
-  match: { params: { index: string, id: string } },
+  match: { params: { index: string, id: string, mode: string } },
   questions: []
 };
 
@@ -112,10 +113,12 @@ class TrainingRecordingComponent extends Component<Props, State> {
     const {
       questions,
       match: {
-        params: { index, id }
+        params: { index, id, mode }
       }
     } = this.props;
-    const finished = parseInt(index) + 1 >= questions.length;
+    const retakeIndex = parseInt(index);
+    const nextIndex =
+      retakeIndex + 1 >= questions.length ? undefined : retakeIndex + 1;
 
     return (
       <div className={styles.layout}>
@@ -156,19 +159,12 @@ class TrainingRecordingComponent extends Component<Props, State> {
             />
           </div>
         </div>
-        <div className={styles.navigation}>
-          <LinkButton to={`/training/question/${parseInt(index)}/recording`}>
-            Retake
-          </LinkButton>
-          {!finished && (
-            <LinkButton to={`/training/question/${parseInt(index) + 1}/detail`}>
-              Next
-            </LinkButton>
-          )}
-          {finished && (
-            <LinkButton to={`/training/question/start`}>Finished</LinkButton>
-          )}
-        </div>
+        {mode === 'retake' && (
+          <TrainingRecordingRetake
+            retakeIndex={retakeIndex}
+            nextIndex={nextIndex}
+          />
+        )}
       </div>
     );
   }

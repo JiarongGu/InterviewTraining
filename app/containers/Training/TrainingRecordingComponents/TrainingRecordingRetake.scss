@@ -1,0 +1,41 @@
+@import '../../../materialize/sass/components/color-variables';
+@import '../../../materialize/sass/components/color-classes';
+@import '../../../materialize/sass/components/variables';
+.navigation {
+  position: fixed;
+  bottom: 1.2rem;
+  right: 1rem;
+  >a {
+    height: 3.2rem;
+    line-height: 3.2rem;
+    text-align: center;
+    font-size: 1.5rem;
+    margin: 0 0.5rem;
+  }
+}
+
+.modal-content {
+  background-color: #fafafa;
+  padding: 1rem;
+  border-radius: 2px;
+  box-shadow: 0 24px 38px 3px rgba(0,0,0,0.14), 0 9px 46px 8px rgba(0,0,0,0.12), 0 11px 15px -7px rgba(0,0,0,0.2);
+  width: 22rem;
+  padding-left: 5rem;
+
+  > span {
+    font-size: 1rem;
+    font-weight: bold;
+    display: inline-block;
+  }
+
+  > i {
+    color: color('teal', 'lighten-1');
+    float: left;
+    position: relative;
+    margin-left: -3.5rem;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+}
