@@ -5,8 +5,7 @@ import { FilePaths } from './FilePaths';
 
 export class QuestionService {
   constructor() {
-    const filePaths = new FilePaths();
-    this.adapter = new FileSync(`${filePaths.dirDataJsons}/questions.json`);
+    this.adapter = new FileSync(`${FilePaths.resolve(FilePaths.dirDataJsons)}/questions.json`);
     this.db = low(this.adapter);
 
     this.db

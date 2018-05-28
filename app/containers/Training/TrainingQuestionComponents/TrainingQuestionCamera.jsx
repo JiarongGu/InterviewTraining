@@ -25,7 +25,6 @@ type State = {
   mode: string,
   error: {},
   question: { id: string, question: string, takes: number, time: number },
-  filePaths: FilePaths,
   recordingService: RecordingService
 };
 
@@ -37,7 +36,8 @@ function getRecordingInfo(filePath, questionId) {
   var filename = filePath.replace(/^.*[\\\/]/, '');
   var duration = parseFloat(filename.split('.')[1]) / 1000;
   var id = filename.split('.')[0];
-  return { id, filePath, duration, questionId };
+  var relativePath = FilePaths.relative(filePath);
+  return { id, filePath: relativePath, duration, questionId };
 }
 
 class TrainingQuestionCameraComponent extends Component<Props, State> {
@@ -48,7 +48,6 @@ class TrainingQuestionCameraComponent extends Component<Props, State> {
       mode: COUNT_MODE,
       error: undefined,
       question: {},
-      filePaths: new FilePaths(),
       recordingService: new RecordingService()
     };
 
@@ -90,7 +89,7 @@ class TrainingQuestionCameraComponent extends Component<Props, State> {
         <div className={styles.container}>
           <Camera
             ref={this.cameraRef}
-            output={this.state.filePaths.dirDataRecordings}
+            output={FilePaths.resolve(FilePaths.dirDataRecordings)}
             onError={error => this.setState({ error, mode: ERROR_MODE })}
             styles={{ video: styles.video }}
           />

@@ -10,7 +10,7 @@ import styles from './TrainingRecording.scss';
 import mStyles from '../../materialize/sass/materialize.scss';
 import classNames from 'classnames';
 
-import { RecordingService, Recording } from '../../services';
+import { RecordingService, Recording, FilePaths } from '../../services';
 
 type Props = {
   match: { params: { index: string, id: string, mode: string } },
@@ -119,7 +119,8 @@ class TrainingRecordingComponent extends Component<Props, State> {
     const retakeIndex = parseInt(index);
     const nextIndex =
       retakeIndex + 1 >= questions.length ? undefined : retakeIndex + 1;
-
+    const { recording } = this.state;
+    
     return (
       <div className={styles.layout}>
         <BackNavigation />
@@ -129,7 +130,7 @@ class TrainingRecordingComponent extends Component<Props, State> {
         <video
           ref={this.videoRef}
           className={styles.video}
-          src={this.state.recording.filePath}
+          src={FilePaths.resolve(recording.filePath)}
           type={'video/webm'}
           onTimeUpdate={this.onTimeUpdate}
           onEnded={this.onEnded}

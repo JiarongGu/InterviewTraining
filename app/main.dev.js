@@ -12,8 +12,6 @@
  */
 import { app, BrowserWindow } from 'electron';
 import MenuBuilder from './menu';
-import fs from 'fs';
-import { FilePaths } from './services';
 
 let mainWindow = null;
 

@@ -1,7 +1,6 @@
 import low from 'lowdb';
 import FileSync from 'lowdb/adapters/FileSync';
 import { FilePaths } from './FilePaths';
-import _ from 'lodash';
 
 export interface Recording {
   id: string;
@@ -12,8 +11,8 @@ export interface Recording {
 
 export class RecordingService {
   constructor() {
-    const filePaths = new FilePaths();
-    this.adapter = new FileSync(`${filePaths.dirDataJsons}/recordings.json`);
+    this.adapter = new FileSync(`${FilePaths.resolve(FilePaths.dirDataRecordings)}/recordings.json`);
+
     this.db = low(this.adapter);
     this.db.defaults({ recordings: [] }).write();
     this.recordingsDb = this.db.get('recordings');
