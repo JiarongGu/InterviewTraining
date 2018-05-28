@@ -13,6 +13,7 @@ import {
 } from '../../components/layout';
 import { TrainingExample } from './TrainingExample';
 import { TrainingGallery } from './TrainingGallery';
+import { Question } from '../../services';
 
 import styles from './TrainingQuestion.scss';
 import mStyles from '../../materialize/sass/materialize.scss';
@@ -21,7 +22,7 @@ import question from '../../reducers/question';
 
 type Props = {
   match: { params: { index: string } },
-  questions: []
+  questions: Question[]
 };
 
 class TrainingQuestionComponent extends Component<Props> {
@@ -56,16 +57,16 @@ class TrainingQuestionComponent extends Component<Props> {
                   <TrainingQuestionDetail
                     question={question}
                     index={questionIndex}
-                  >
-                    <TrainingExample />
-                    <TrainingGallery />
-                  </TrainingQuestionDetail>
+                  />
                 )}
                 {mode === 'recording' && (
                   <TrainingQuestionRecording
                     question={question}
                     index={questionIndex}
-                  />
+                  >
+                    <TrainingExample question={question} />
+                    <TrainingGallery question={question} />
+                  </TrainingQuestionRecording>
                 )}
               </div>
             </div>

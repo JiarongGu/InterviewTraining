@@ -3,6 +3,13 @@ import FileSync from "lowdb/adapters/FileSync";
 import { Random } from "../utils";
 import { FilePaths } from './FilePaths';
 
+export interface Question {
+  id: string,
+  question: string,
+  takes: number,
+  time: number,
+}
+
 export class QuestionService {
   constructor() {
     this.adapter = new FileSync(`${FilePaths.resolve(FilePaths.dirDataJsons)}/questions.json`);

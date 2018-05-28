@@ -12,7 +12,8 @@ import { TrainingQuestionCamera } from './TrainingQuestionCamera';
 
 type Props = {
   question: { id: string, question: string, takes: number, time: number },
-  index: number
+  index: number,
+  children?: React.ReactNode
 };
 
 type State = {
@@ -29,7 +30,7 @@ export class TrainingQuestionRecording extends Component<Props> {
   }
 
   render() {
-    const { question, index } = this.props;
+    const { question, index, children } = this.props;
 
     return (
       <div>
@@ -47,6 +48,7 @@ export class TrainingQuestionRecording extends Component<Props> {
           >
             Start Recording
           </Button>
+          {children}
         </div>
       </div>
     );
