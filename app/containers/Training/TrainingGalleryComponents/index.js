@@ -1,0 +1,1 @@
+export { TrainingGalleryVideo } from './TrainingGalleryVideo';

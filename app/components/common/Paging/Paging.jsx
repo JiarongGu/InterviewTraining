@@ -8,7 +8,7 @@ type Props = {
     size: string
 }
 
-export class Card extends Component<Props> {
+export class Paging extends Component<Props> {
     render() {
         return (
             <div className={classNames(mStyles['col'], mStyles[this.props.size], this.props.className)} style={this.props.styles}>

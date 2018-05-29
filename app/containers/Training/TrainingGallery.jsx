@@ -1,10 +1,18 @@
+// @flow
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { Modal, Card } from '../../components/common';
 import { SectionClose } from '../../components/layout';
-import { Question, Recording, RecordingService } from '../../services';
+import { TrainingGalleryVideo } from './TrainingGalleryComponents';
+
+import {
+  Question,
+  Recording,
+  RecordingService,
+  FilePaths
+} from '../../services';
 
 import styles from './TrainingGallery.scss';
 import mStyles from '../../materialize/sass/materialize.scss';
@@ -15,7 +23,8 @@ type Props = {
 };
 
 type State = {
-  isModalOpen: boolean
+  isModalOpen: boolean,
+  page: number
 };
 
 export class TrainingGallery extends Component<Props> {
@@ -23,11 +32,18 @@ export class TrainingGallery extends Component<Props> {
     super(props);
 
     this.state = {
-      isModalOpen: false
+      isModalOpen: false,
+      page: 1
     };
+
+    this.recordingService = new RecordingService();
+    this.recordings = this.recordingService.getByQuestionId(
+      this.props.question.id
+    );
 
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
+    this.getPagedRecordings = this.getPagedRecordings.bind(this);
   }
 
   openModal() {
@@ -38,9 +54,15 @@ export class TrainingGallery extends Component<Props> {
     this.setState({ isModalOpen: false });
   }
 
+  getPagedRecordings(page) {
+    const index = (page - 1) * 6;
+    if (this.recordingService.length <= index) return [];
+    return this.recordings.slice(index, index + 6);
+  }
+
   render() {
     const { question } = this.props;
-
+    const recordings = this.getPagedRecordings(this.state.page);
     return (
       <div>
         {this.state.isModalOpen && (
@@ -48,19 +70,25 @@ export class TrainingGallery extends Component<Props> {
             <div className={styles.container}>
               <SectionClose onConfirm={this.closeModal} />
               <div className={styles.content}>
-                <h2 className={styles.title}>Takes</h2>
-                <span className={styles.question}>{question.question}</span>
+                <div className={styles.title}>
+                  <h2>Takes</h2> <span>{question.question}</span>
+                </div>
                 <div className={styles.gallery}>
-                  <div className={classNames(mStyles['row'], styles.row)}>
-                    <Card size={'m4'} className={styles.col} />
-                    <Card size={'m4'} className={styles.col} />
-                    <Card size={'m4'} className={styles.col} />
-                  </div>
-                  <div className={classNames(mStyles['row'], styles.row)}>
-                    <Card size={'m4'} className={styles.col} />
-                    <Card size={'m4'} className={styles.col} />
-                    <Card size={'m4'} className={styles.col} />
-                  </div>
+                  {[0, 3].map(row => (
+                    <div
+                      key={row}
+                      className={classNames(mStyles['row'], styles.row)}
+                    >
+                      {recordings.slice(row, row + 3).map(recording => (
+                        <div
+                          key={recording.id}
+                          className={classNames(mStyles['col'], mStyles['m4'])}
+                        >
+                          <TrainingGalleryVideo recording={recording} />
+                        </div>
+                      ))}
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>

@@ -2,7 +2,17 @@ import fs from 'fs';
 import electron from 'electron';
     
 export class FilePaths {
-  constructor() {
+  static dirData = '../data';
+  static dirDataJsons = `${FilePaths.dirData}/jsons`;
+  static dirDataRecordings = `${FilePaths.dirData}/recordings`;
+  static dirDataExamples = `${FilePaths.dirData}/examples`;
+
+  static getAppPath(): string {
+    if(!FilePaths.appPath) FilePaths.appPath = electron.remote.app.getAppPath();
+    return FilePaths.appPath;
+  }
+
+  static init() {
     const mkdirNotExist = function(dir) {
       if (!fs.existsSync(dir)) {
         fs.mkdirSync(dir);
@@ -10,19 +20,10 @@ export class FilePaths {
     };
 
     mkdirNotExist(FilePaths.resolve(FilePaths.dirData));
-    mkdirNotExist(FilePaths.resolve(FilePaths.dirDataRecordings));
     mkdirNotExist(FilePaths.resolve(FilePaths.dirDataJsons));
+
+    mkdirNotExist(FilePaths.resolve(FilePaths.dirDataRecordings));
     mkdirNotExist(FilePaths.resolve(FilePaths.dirDataExamples));
-  }
-
-  static dirData = '../data';
-  static dirDataRecordings = `${FilePaths.dirData}/recordings`;
-  static dirDataJsons = `${FilePaths.dirData}/jsons`;
-  static dirDataExamples = `${FilePaths.dirData}/examples`;
-
-  static getAppPath(): string {
-    if(!FilePaths.appPath) FilePaths.appPath = electron.remote.app.getAppPath();
-    return FilePaths.appPath;
   }
 
   static resolve(relativePath: string): string {

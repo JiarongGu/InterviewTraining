@@ -1,17 +1,19 @@
 import low from 'lowdb';
 import FileSync from 'lowdb/adapters/FileSync';
 import { FilePaths } from './FilePaths';
+import { moment } from '../utils';
 
 export interface Recording {
   id: string;
   filePath: string;
   questionId: string;
   duration: number;
+  created?: string;
 }
 
 export class RecordingService {
   constructor() {
-    this.adapter = new FileSync(`${FilePaths.resolve(FilePaths.dirDataRecordings)}/recordings.json`);
+    this.adapter = new FileSync(`${FilePaths.resolve(FilePaths.dirDataJsons)}/recordings.json`);
 
     this.db = low(this.adapter);
     this.db.defaults({ recordings: [] }).write();
@@ -29,12 +31,18 @@ export class RecordingService {
     return this.recordingsDb.value();
   };
 
-  insert = function(recording: Recording) {
-    return this.recordingsDb.insert(recording).write();
-  };
-
   getById = function(id: string): Recording {
     return this.recordingsDb.find({ id }).value();
+  };
+  
+  getByQuestionId = function(questionId: string): Recording[] {
+    return this.recordingsDb.filter({ questionId: questionId }).value();
+  }
+
+  insert = function(recording: Recording) {
+    recording.created = moment().format('YYYY-MM-DD HH:mm:ss');
+    console.log('moment:: ', recording);
+    return this.recordingsDb.insert(recording).write();
   };
 
   update = function(recording: Recording) {
