@@ -87,7 +87,10 @@ export class VideoPlayer extends Component<Props, State> {
       console.log('Recording duration mismatch.');
       if(this.props.onDurationMismatch){
         const duration = this.props.onDurationMismatch(video.duration);
-        this.setState({ duration  });
+        this.setState({ duration });
+      }
+      else{
+        this.setState({ duration: video.duration });
       }
     }
   }

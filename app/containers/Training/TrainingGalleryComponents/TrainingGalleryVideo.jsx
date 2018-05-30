@@ -83,7 +83,7 @@ export class TrainingGalleryVideo extends Component<Props, State> {
 
         <span>{recording.created}</span>
         <span>{recording.duration}</span>
-        {this.state.isModalOpen && <VideoPopup src={videoSrc} />}
+        {this.state.isModalOpen && <VideoPopup src={videoSrc} duration={recording.duration} />}
       </div>
     );
   }

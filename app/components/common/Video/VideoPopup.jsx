@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { Modal, Card, Icon } from '../../../components/common';
+import { Modal, VideoPlayer } from '../../../components/common';
 import { SectionClose } from '../../../components/layout';
 import { Recording, FilePaths } from '../../../services';
 
@@ -13,7 +13,7 @@ import classNames from 'classnames';
 
 type Props = {
   src: string,
-  onClose?: () => void
+  duration: number
 };
 
 export class VideoPopup extends Component<Props> {
@@ -27,14 +27,14 @@ export class VideoPopup extends Component<Props> {
   }
 
   render() {
-    const { src } = this.props;
+    const { src, duration } = this.props;
+    console.log(duration);
     return (
       <Modal>
         <div className={styles.container}>
-          <video
-            className={styles.video}
+          <VideoPlayer
             src={src}
-            autoPlay
+            duration={duration}
           />
         </div>
       </Modal>
