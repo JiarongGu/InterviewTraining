@@ -33,18 +33,18 @@ export class VideoControls extends Component<Props> {
     this.seekRef = React.createRef();
   }
 
-  onStart() {
-    if (this.props.onStart) this.props.onStart();
+  onStart(event) {
+    if (this.props.onStart) this.props.onStart(event);
     this.setState({playing: true});
   }
 
-  onPasue() {
-    if (this.props.onPasue) this.props.onPasue();
+  onPasue(event) {
+    if (this.props.onPasue) this.props.onPasue(event);
     this.setState({playing: false});
   }
 
-  onSeek() {
-    if (this.props.onSeek) this.props.onSeek();
+  onSeek(event) {
+    if (this.props.onSeek) this.props.onSeek(event);
   }
 
   setSeek(seek: number) {
