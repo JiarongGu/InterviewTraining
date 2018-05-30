@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { Modal, Card } from '../../components/common';
+import { Modal, Card, Icon } from '../../components/common';
 import { SectionClose } from '../../components/layout';
 import { TrainingGalleryVideo } from './TrainingGalleryComponents';
 
@@ -90,6 +90,8 @@ export class TrainingGallery extends Component<Props> {
                     </div>
                   ))}
                 </div>
+                <div className={styles['page-next']}><Icon icon={'angle-right'} size={'5x'} /></div>
+                <div className={styles['page-previous']}><Icon icon={'angle-left'} size={'5x'} /></div>
               </div>
             </div>
           </Modal>

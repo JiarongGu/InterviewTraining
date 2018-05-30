@@ -51,3 +51,23 @@
   height: 100%;
   padding: 4rem 10%;
 }
+
+.page-previous {
+  position: fixed;
+  top: 50%;
+  left: 4rem;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.page-next {
+  position: fixed;
+  top: 50%;
+  right: 4rem;
+  
+  &:hover {
+    cursor: pointer;
+  }
+}

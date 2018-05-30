@@ -24,7 +24,7 @@ export class Home extends Component<Props> {
                             </Link>
                         </Card>
                         <Card className={styles.card} size={'m4'}>
-                            <Link to={'/training'} className={styles['card-content']}>
+                            <Link to={'/training/true'} className={styles['card-content']}>
                                 <Icon icon={'video'} style={'Solid'} size={'7x'} />
                                 <h4 className={styles['card-title']}>Self Training</h4>
                             </Link>

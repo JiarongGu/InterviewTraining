@@ -19,7 +19,7 @@ class BackNavigationToTrainingComponent extends React.Component<Props> {
       <div className={classNames(styles.container, this.props.className)}>
         <a
           onClick={() => {
-            this.props.history.push('/training/start');
+            this.props.history.push('/training/false');
           }}
         >
           <Icon icon={'chevron-left'} size={'3x'} className={classNames(mStyles['grey-text'], mStyles['text-darken-4'], styles['back-button'])} />

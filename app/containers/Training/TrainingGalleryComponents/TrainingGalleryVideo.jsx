@@ -3,8 +3,9 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { Modal, Card } from '../../../components/common';
+import { Modal, Card, Icon, VideoPopup } from '../../../components/common';
 import { SectionClose } from '../../../components/layout';
+
 import { Recording, FilePaths } from '../../../services';
 
 import styles from './TrainingGalleryVideo.scss';
@@ -13,11 +14,12 @@ import classNames from 'classnames';
 
 type Props = {
   recording: Recording,
-  className: string
+  className?: string
 };
 
 type State = {
-  isOpen: boolean
+  isModalOpen: boolean,
+  videoHover: boolean
 };
 
 export class TrainingGalleryVideo extends Component<Props, State> {
@@ -25,8 +27,11 @@ export class TrainingGalleryVideo extends Component<Props, State> {
     super(props);
 
     this.state = {
-      isOpen: false
+      isModalOpen: false,
+      videoHover: false
     };
+
+    this.openModal = this.openModal.bind(this);
   }
 
   openModal() {
@@ -39,18 +44,46 @@ export class TrainingGalleryVideo extends Component<Props, State> {
 
   render() {
     const { recording, className } = this.props;
+    const videoSrc = FilePaths.resolve(recording.filePath);
     return (
-      <div className={classNames(className, styles.container)}>
+      <div
+        className={classNames(className, styles.container)}
+        onMouseLeave={() => {
+          this.setState({ videoHover: false });
+        }}
+      >
+        {this.state.videoHover && (
+          <div
+            className={styles['video-control']}
+            onMouseLeave={() => {
+              this.setState({ videoHover: false });
+            }}
+          >
+            <div className={styles.alignment}>
+              <Icon
+                icon={'play-circle'}
+                style={'Regular'}
+                size={'5x'}
+                className={styles['play-btn']}
+                onClick={this.openModal}
+              />
+            </div>
+          </div>
+        )}
+        <div
+          className={styles['video-hover']}
+          onMouseEnter={() => {
+            this.setState({ videoHover: true });
+          }}
+        />
         <video
           className={styles.video}
-          src={FilePaths.resolve(recording.filePath)}
+          src={videoSrc}
         />
-        <span>
-            {recording.created}
-        </span>
-        <span>
-            {recording.duration}
-        </span>
+
+        <span>{recording.created}</span>
+        <span>{recording.duration}</span>
+        {this.state.isModalOpen && <VideoPopup src={videoSrc} />}
       </div>
     );
   }

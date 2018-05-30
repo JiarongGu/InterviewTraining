@@ -1,0 +1,11 @@
+.container {
+    width: 100vw;
+    height: calc(100vh - 64px);
+    background-color: color("teal", "lighten-5");
+    display: table;
+}
+
+.video {
+    width: 100%;
+    height: 100%
+}

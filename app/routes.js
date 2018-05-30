@@ -12,7 +12,7 @@ export default () => (
       <Route path="/training/question/:index/recording/:id/:mode(retake|review)" component={TrainingRecording} />
       <Route path="/training/question/:index/:mode(detail|recording)" component={TrainingQuestion} />
       <Route path="/counter" component={CounterPage} />
-      <Route path="/training" component={TrainingStart} />
+      <Route path="/training/:animation" component={TrainingStart} />
       <Route path="/" component={Home} />
     </Switch>
   </App>

@@ -1,29 +1,48 @@
 .container {
-    position: absolute;
-    display: table;
-    height: 100%;
-    width: 100%;
-    top: 64px;
+  position: absolute;
+  display: table;
+  height: 100%;
+  width: 100%;
+  top: 64px;
 }
 
 .alignment {
-    display: table-cell;
-    vertical-align: middle;
-
-    > div {
-        display: table;
-        margin: auto;
-        left: 0;
-        right: 0;
-        position: relative;
-    }
+  display: table-cell;
+  vertical-align: middle;
+  >div {
+    display: table;
+    margin: auto;
+    left: 0;
+    right: 0;
+    position: relative;
+  }
 }
 
 .button-container {
-    padding-top: 5rem;
+  padding-top: 5rem;
 }
 
 .button {
-    padding: 0 4rem;
-    text-transform: none;
+  padding: 0 4rem;
+  text-transform: none;
+}
+
+:global {
+  .training-animation-appear {
+    opacity: 0;
+
+    &.training-animation-appear-active {
+        opacity: 1;
+        transition: opacity .5s ease-in;
+      }
+  }
+
+  .training-animation-leave {
+    opacity: 1;
+
+    &.training-animation-leave-active {
+        opacity: 0.01;
+        transition: opacity .5s ease-in;
+      }
+  }
 }

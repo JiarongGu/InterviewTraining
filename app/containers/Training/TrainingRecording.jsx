@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { Icon, LinkButton } from '../../components/common';
+import { Icon, LinkButton, VideoControls } from '../../components/common';
 import { BackNavigation, TrainingSectionClose } from '../../components/layout';
 import { TrainingRecordingRetake } from './TrainingRecordingComponents';
 
@@ -66,7 +66,7 @@ class TrainingRecordingComponent extends Component<Props, State> {
     const seek = this.seekRef.current;
 
     this.setState({ playing: true }, () => {
-      seek.value = video.currentTime / this.state.recording.duration * 100;
+      seek.setSeek(video.currentTime / this.state.recording.duration * 100);
       video.play();
     });
   }
@@ -91,7 +91,7 @@ class TrainingRecordingComponent extends Component<Props, State> {
     const seek = this.seekRef.current;
 
     this.setState({ time: formatSeconds(video.currentTime) }, () => {
-      seek.value = video.currentTime / this.state.recording.duration * 100;
+      seek.setSeek(video.currentTime / this.state.recording.duration * 100);
     });
 
     if (
@@ -106,7 +106,7 @@ class TrainingRecordingComponent extends Component<Props, State> {
   }
 
   onEnded(event) {
-    this.setState({ playing: false });
+    const seek = this.seekRef.current.setPlay(false);
   }
 
   render() {
@@ -120,7 +120,7 @@ class TrainingRecordingComponent extends Component<Props, State> {
     const nextIndex =
       retakeIndex + 1 >= questions.length ? undefined : retakeIndex + 1;
     const { recording } = this.state;
-    
+
     return (
       <div className={styles.layout}>
         <BackNavigation />
@@ -137,29 +137,13 @@ class TrainingRecordingComponent extends Component<Props, State> {
         />
 
         <div className={styles.controls}>
-          {!this.state.playing && (
-            <div className={styles.play} onClick={this.play}>
-              <Icon icon={'play-circle'} size={'3x'} />
-            </div>
-          )}
-          {this.state.playing && (
-            <div className={styles.pause} onClick={this.pause}>
-              <Icon icon={'pause-circle'} size={'3x'} />
-            </div>
-          )}
-          <div className={styles.time}>
-            <span>{this.state.time}</span>
-          </div>
-          <div className={styles['seek-bar']}>
-            <input
-              ref={this.seekRef}
-              type={'range'}
-              min={0}
-              max={100}
-              onChange={this.seek}
-              defaultValue={0}
-            />
-          </div>
+          <VideoControls
+            time={this.state.time}
+            ref={this.seekRef}
+            onPasue={this.pause}
+            onStart={this.play}
+            onSeek={this.seek}
+          />
         </div>
         {mode === 'retake' && (
           <TrainingRecordingRetake

@@ -1,0 +1,64 @@
+@import '../../../materialize/sass/components/color-variables';
+@import '../../../materialize/sass/components/color-classes';
+@import '../../../materialize/sass/components/variables';
+
+.controls {
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 100%;
+    z-index: 1000;
+    display: table;
+    padding: 0 0.2rem;
+    >div {
+      display: table-cell;
+      vertical-align: middle;
+    }
+    >.play {
+      padding: 0.5rem;
+      width: 3rem;
+      height: 3rem;
+      color: color('teal', 'lighten-1');
+      &:hover, &:focus {
+        color: color('teal', 'lighten-2');
+        cursor: pointer;
+      }
+      &:active {
+        color: color('teal', 'darken-2');
+      }
+    }
+    >.pause {
+      padding: 0.5rem;
+      width: 3rem;
+      height: 3rem;
+      color: color('materialize-red', 'lighten-1');
+      &:hover, &:focus {
+        color: color('materialize-red', 'lighten-2');
+        cursor: pointer;
+      }
+      &:active {
+        color: color('materialize-red', 'darken-2');
+      }
+    }
+    >.time {
+      width: 3rem;
+      text-align: right;
+      padding: 0 0.5rem;
+      font-size: 1.2rem;
+    }
+    >.seek-bar {
+      padding: 0.5rem;
+      >input[type=range] {
+        border: none;
+        &::-webkit-slider-runnable-track {
+          background: grey;
+          height: 0.3rem;
+        }
+        &::-webkit-slider-thumb {
+          height: 1.2rem;
+          width: 1.2rem;
+          margin-top: -0.4rem;
+        }
+      }
+    }
+  }
