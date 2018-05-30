@@ -13,7 +13,8 @@ import classNames from 'classnames';
 
 type Props = {
   src: string,
-  duration: number
+  duration: number,
+  type: string,
 };
 
 export class VideoPopup extends Component<Props> {
@@ -27,7 +28,7 @@ export class VideoPopup extends Component<Props> {
   }
 
   render() {
-    const { src, duration } = this.props;
+    const { src, duration, type } = this.props;
     console.log(duration);
     return (
       <Modal>
@@ -35,6 +36,7 @@ export class VideoPopup extends Component<Props> {
           <VideoPlayer
             src={src}
             duration={duration}
+            type={type}
           />
         </div>
       </Modal>
