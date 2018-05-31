@@ -13,6 +13,7 @@ import classNames from 'classnames';
 import { RecordingService, Recording, FilePaths } from '../../services';
 
 type Props = {
+  history: any,
   match: { params: { index: string, id: string, mode: string } },
   questions: []
 };
@@ -52,6 +53,7 @@ class TrainingRecordingComponent extends Component<Props, State> {
 
   render() {
     const {
+      history,
       questions,
       match: {
         params: { index, id, mode }
@@ -64,7 +66,7 @@ class TrainingRecordingComponent extends Component<Props, State> {
 
     return (
       <div className={styles.layout}>
-        <BackNavigation />
+        <BackNavigation goBack={() => { history.push(`/training/question/${retakeIndex}/recording`); }} />
         <TrainingSectionClose />
         <div className={styles['back-button-background']} />
         <div className={styles['close-button-background']} />

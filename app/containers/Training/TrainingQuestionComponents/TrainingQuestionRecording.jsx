@@ -13,7 +13,8 @@ import { TrainingQuestionCamera } from './TrainingQuestionCamera';
 type Props = {
   question: { id: string, question: string, takes: number, time: number },
   index: number,
-  children?: React.ReactNode
+  children?: React.ReactNode,
+  recording?: boolean
 };
 
 type State = {
@@ -25,7 +26,7 @@ export class TrainingQuestionRecording extends Component<Props> {
     super(props);
 
     this.state = {
-      recording: false
+      recording: this.props.recording || false
     };
   }
 

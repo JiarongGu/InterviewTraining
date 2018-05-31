@@ -9,7 +9,8 @@ import classNames from 'classnames';
 
 type Props = {
   history: { goBack: () => void },
-  className?: string
+  className?: string,
+  goBack?: () => void
 };
 
 class BackNavigationComponent extends React.Component<Props> {
@@ -18,7 +19,11 @@ class BackNavigationComponent extends React.Component<Props> {
       <div className={classNames(styles.container, this.props.className)}>
         <a
           onClick={() => {
-            this.props.history.goBack();
+            if (this.props.goBack) {
+              this.props.goBack();
+            } else {
+              this.props.history.goBack();
+            }
           }}
         >
           <Icon

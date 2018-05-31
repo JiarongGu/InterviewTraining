@@ -29,12 +29,11 @@ export class TrainingGalleryVideoDelete extends Component<Props, State> {
     };
 
     this.onRecordingDelete = this.onRecordingDelete.bind(this);
-    this.recordingService = new RecordingService();
   }
 
   onRecordingDelete() {
     const { onDelete, recording } = this.props;
-    const recordingService = this.recordingService;
+    const recordingService = new RecordingService();
 
     recordingService.delete(recording.id);
 

@@ -36,7 +36,7 @@ export class TrainingRecordingRetake extends Component<Props, State> {
           </Modal>
         )}
         <div className={styles.navigation}>
-          <LinkButton to={`/training/question/${retakeIndex}/recording`}>
+          <LinkButton to={`/training/question/${retakeIndex}/retake`}>
             Retake
           </LinkButton>
           {nextIndex != undefined && (

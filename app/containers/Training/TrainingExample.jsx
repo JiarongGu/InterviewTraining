@@ -23,10 +23,15 @@ export class TrainingExample extends Component<Props> {
     } 
 
     this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
   }
 
   openModal() {
+    this.setState({ isModalOpen: true });
+  }
 
+  closeModal() {
+    this.setState({ isModalOpen: false });
   }
 
   render() {

@@ -69,6 +69,14 @@ class TrainingQuestionComponent extends Component<Props> {
                     <TrainingGallery question={question} />
                   </TrainingQuestionRecording>
                 )}
+                {mode === 'retake' && (
+                  <TrainingQuestionRecording
+                    question={question}
+                    index={questionIndex}
+                    recording={true}
+                  >
+                  </TrainingQuestionRecording>
+                )}
               </div>
             </div>
           )}
