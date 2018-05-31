@@ -2,6 +2,7 @@ import low from 'lowdb';
 import FileSync from 'lowdb/adapters/FileSync';
 import { FilePaths } from './FilePaths';
 import { moment } from '../utils';
+import fs from 'fs';
 
 export interface Recording {
   id: string;
@@ -41,7 +42,6 @@ export class RecordingService {
 
   insert = function(recording: Recording) {
     recording.created = moment().format('YYYY-MM-DD HH:mm:ss');
-    console.log('moment:: ', recording);
     return this.recordingsDb.insert(recording).write();
   };
 
@@ -50,4 +50,14 @@ export class RecordingService {
       .assign({ ...recording })
       .write();
   };
+
+  delete = function(recordingId: string) {
+    var recording = this.recordingsDb.find({ id: recordingId }).value();
+    var filePath = FilePaths.resolve(recording.filePath);
+
+    if (fs.existsSync(filePath)) {
+      fs.unlinkSync(filePath);
+    }
+    this.recordingsDb.remove({ id: recordingId }).write()
+  }
 }

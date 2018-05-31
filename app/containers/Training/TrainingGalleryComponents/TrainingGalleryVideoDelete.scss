@@ -1,0 +1,20 @@
+@import '../../../materialize/sass/components/color-variables';
+@import '../../../materialize/sass/components/color-classes';
+@import '../../../materialize/sass/components/variables';
+
+.container {
+    float: right;
+}
+
+.delete-btn {
+    color: color("teal", "lighten-1");
+    &:hover,
+    &:focus {
+      color: color("teal", "lighten-2");
+      cursor: pointer;
+    }
+    &:active {
+      color: color("teal", "darken-1");
+    }
+  }
+  

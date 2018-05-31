@@ -53,15 +53,37 @@
   }
 }
 
-.delete-btn {
-  float: right;
-  color: color("materialize-red", "darken-1");
-  &:hover,
-  &:focus {
-    color: color("materialize-red", "lighten-1");
-    cursor: pointer;
-  }
-  &:active {
-    color: color("materialize-red", "darken-1");
+.index {
+  background-color: color('teal', 'lighten-2');
+  border-radius: 50%;
+  height: 2rem;
+  min-width: 2rem;
+  color: white;
+  font-size: 1.1rem;
+  text-align: center;
+  line-height: 2rem;
+  position: absolute;
+  float: left;
+  margin-top: -12.7rem;
+  margin-left: 0.3rem;
+}
+
+.created-time {
+  margin-left: 0.3rem;
+}
+
+.duration {
+  position: absolute;
+  margin-top: -13.0rem;
+  width: 20.15rem;
+  text-align: right;
+
+  >span {
+    width: 3rem;
+    display: inline-block;
+    padding: 0 0.3rem;
+    background-color: white;
+    color: #444;
+    border-bottom-left-radius: 2px;
   }
 }

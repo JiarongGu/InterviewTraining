@@ -52,22 +52,25 @@
   padding: 4rem 10%;
 }
 
-.page-previous {
+.page-arrow {
   position: fixed;
   top: 50%;
-  left: 4rem;
-
-  &:hover {
-    cursor: pointer;
-  }
-}
-
-.page-next {
-  position: fixed;
-  top: 50%;
-  right: 4rem;
+  color: color("teal", "lighten-1");
   
+  &.next {
+    right: 4rem;
+  }
+
+  &.previous {
+    left: 4rem;
+  }
+
   &:hover {
     cursor: pointer;
+    color: color("teal", "lighten-2");
+  }
+
+  &:active {
+    color: color("teal", "darken-1");
   }
 }

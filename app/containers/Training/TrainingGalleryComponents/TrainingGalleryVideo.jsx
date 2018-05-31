@@ -3,9 +3,16 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { Modal, Card, Icon, VideoPopup, MessageBox } from '../../../components/common';
+import {
+  Modal,
+  Card,
+  Icon,
+  VideoPopup,
+  MessageBox
+} from '../../../components/common';
 import { SectionClose } from '../../../components/layout';
 import { TrainingGalleryVideoHoverOverLay } from './TrainingGalleryVideoHoverOverLay';
+import { TrainingGalleryVideoDelete } from './TrainingGalleryVideoDelete';
 
 import { Recording, FilePaths } from '../../../services';
 
@@ -14,16 +21,24 @@ import mStyles from '../../../materialize/sass/materialize.scss';
 import classNames from 'classnames';
 
 type Props = {
+  index: number,
   recording: Recording,
   className?: string,
-  onDeleted?: () => void
+  onDelete?: () => void
 };
 
 type State = {
   mouseEnter: boolean,
-  isVideoModalOpen: boolean,
-  idDeleteModalOpen: boolean
+  isVideoModalOpen: boolean
 };
+
+function formatSeconds(seconds) {
+  const minutesDisplay = Math.floor(seconds / 60);
+  const secondsInMinute = '000000000' + Math.floor(seconds % 60);
+  const secondsDisplay = secondsInMinute.substr(secondsInMinute.length - 2);
+
+  return `${minutesDisplay}:${secondsDisplay}`;
+}
 
 export class TrainingGalleryVideo extends Component<Props, State> {
   constructor(props) {
@@ -31,20 +46,13 @@ export class TrainingGalleryVideo extends Component<Props, State> {
 
     this.state = {
       mouseEnter: false,
-      isVideoModalOpen: false,
-      idDeleteModalOpen: false
+      isVideoModalOpen: false
     };
-
-    this.onRecordingDelete = this.onRecordingDelete.bind(this);
   }
 
   render() {
-    const { recording, className } = this.props;
+    const { recording, className, index, onDelete } = this.props;
     const videoSrc = FilePaths.resolve(recording.filePath);
-
-    onRecordingDelete() {
-
-    }
 
     return (
       <div
@@ -54,40 +62,30 @@ export class TrainingGalleryVideo extends Component<Props, State> {
       >
         <TrainingGalleryVideoHoverOverLay
           parentEntered={this.state.mouseEnter}
-          onPlayClick={() => { this.setState({ isVideoModalOpen: true }) }}
+          onPlayClick={() => {
+            this.setState({ isVideoModalOpen: true });
+          }}
         />
-        <video
-          className={styles.video}
-          src={videoSrc}
-        />
-        <span>{recording.created}</span>
-        <span>{recording.duration}</span>
-        
-        <div
-          className={styles['delete-btn']}
-          onClick={() => this.setState({ idDeleteModalOpen: true })}
-        >
-          <Icon icon={'trash-alt'} size={'lg'} />
+        <video className={styles.video} src={videoSrc} />
+        <span className={styles['created-time']}>{recording.created}</span>
+        {/* <div className={styles.index}>{index}</div> */}
+        <div className={styles.duration}>
+          <span>{formatSeconds(recording.duration)}</span>
         </div>
-        {this.state.idDeleteModalOpen && 
-          <MessageBox 
-            titleText={'Delete Recording'}
-            bodyText={'Are you sure want to delete.'}
-            cancelText={'No, I don\'t'}
-            onCancel={() => this.setState({ idDeleteModalOpen: false })}
-            confirmText={'Yes, I want'}
-            onConfirm={this.onRecordingDelete}
-            backdrop={true}
-          />
-        }
 
-        {this.state.isVideoModalOpen &&
+        <TrainingGalleryVideoDelete
+          recording={recording}
+          onDelete={onDelete}
+        />
+
+        {this.state.isVideoModalOpen && (
           <VideoPopup
             src={videoSrc}
             duration={recording.duration}
             type={'video/webm'}
+            onClose={() => this.setState({ isVideoModalOpen: false })}
           />
-        }
+        )}
       </div>
     );
   }

@@ -3,9 +3,8 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { Modal, VideoPlayer } from '../../../components/common';
+import { Modal, VideoPlayer, Icon } from '../../../components/common';
 import { SectionClose } from '../../../components/layout';
-import { Recording, FilePaths } from '../../../services';
 
 import styles from './VideoPopup.scss';
 import mStyles from '../../../materialize/sass/materialize.scss';
@@ -15,6 +14,7 @@ type Props = {
   src: string,
   duration: number,
   type: string,
+  onClose?: () => void
 };
 
 export class VideoPopup extends Component<Props> {
@@ -28,16 +28,26 @@ export class VideoPopup extends Component<Props> {
   }
 
   render() {
-    const { src, duration, type } = this.props;
-    console.log(duration);
+    const { src, duration, type, onClose } = this.props;
+
     return (
       <Modal>
         <div className={styles.container}>
-          <VideoPlayer
-            src={src}
-            duration={duration}
-            type={type}
-          />
+          <VideoPlayer src={src} duration={duration} type={type} />
+          <div className={styles['close-button-container']}>
+            <div>
+            <Icon
+              icon={'times'}
+              size={'3x'}
+              className={classNames(
+                mStyles['grey-text'],
+                mStyles['text-darken-4'],
+                styles['close-button']
+              )}
+              onClick={onClose}
+            />
+            </div>
+          </div>
         </div>
       </Modal>
     );
