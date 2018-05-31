@@ -3,8 +3,9 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { Modal, Card, Icon, VideoPopup } from '../../../components/common';
+import { Modal, Card, Icon, VideoPopup, MessageBox } from '../../../components/common';
 import { SectionClose } from '../../../components/layout';
+import { TrainingGalleryVideoHoverOverLay } from './TrainingGalleryVideoHoverOverLay';
 
 import { Recording, FilePaths } from '../../../services';
 
@@ -14,12 +15,14 @@ import classNames from 'classnames';
 
 type Props = {
   recording: Recording,
-  className?: string
+  className?: string,
+  onDeleted?: () => void
 };
 
 type State = {
-  isModalOpen: boolean,
-  videoHover: boolean
+  mouseEnter: boolean,
+  isVideoModalOpen: boolean,
+  idDeleteModalOpen: boolean
 };
 
 export class TrainingGalleryVideo extends Component<Props, State> {
@@ -27,63 +30,64 @@ export class TrainingGalleryVideo extends Component<Props, State> {
     super(props);
 
     this.state = {
-      isModalOpen: false,
-      videoHover: false
+      mouseEnter: false,
+      isVideoModalOpen: false,
+      idDeleteModalOpen: false
     };
 
-    this.openModal = this.openModal.bind(this);
-  }
-
-  openModal() {
-    this.setState({ isModalOpen: true });
-  }
-
-  closeModal() {
-    this.setState({ isModalOpen: false });
+    this.onRecordingDelete = this.onRecordingDelete.bind(this);
   }
 
   render() {
     const { recording, className } = this.props;
     const videoSrc = FilePaths.resolve(recording.filePath);
+
+    onRecordingDelete() {
+
+    }
+
     return (
       <div
         className={classNames(className, styles.container)}
-        onMouseLeave={() => {
-          this.setState({ videoHover: false });
-        }}
+        onMouseEnter={() => this.setState({ mouseEnter: true })}
+        onMouseLeave={() => this.setState({ mouseEnter: false })}
       >
-        {this.state.videoHover && (
-          <div
-            className={styles['video-control']}
-            onMouseLeave={() => {
-              this.setState({ videoHover: false });
-            }}
-          >
-            <div className={styles.alignment}>
-              <Icon
-                icon={'play-circle'}
-                style={'Regular'}
-                size={'5x'}
-                className={styles['play-btn']}
-                onClick={this.openModal}
-              />
-            </div>
-          </div>
-        )}
-        <div
-          className={styles['video-hover']}
-          onMouseEnter={() => {
-            this.setState({ videoHover: true });
-          }}
+        <TrainingGalleryVideoHoverOverLay
+          parentEntered={this.state.mouseEnter}
+          onPlayClick={() => { this.setState({ isVideoModalOpen: true }) }}
         />
         <video
           className={styles.video}
           src={videoSrc}
         />
-
         <span>{recording.created}</span>
         <span>{recording.duration}</span>
-        {this.state.isModalOpen && <VideoPopup src={videoSrc} duration={recording.duration} type={'video/webm'} />}
+        
+        <div
+          className={styles['delete-btn']}
+          onClick={() => this.setState({ idDeleteModalOpen: true })}
+        >
+          <Icon icon={'trash-alt'} size={'lg'} />
+        </div>
+        {this.state.idDeleteModalOpen && 
+          <MessageBox 
+            titleText={'Delete Recording'}
+            bodyText={'Are you sure want to delete.'}
+            cancelText={'No, I don\'t'}
+            onCancel={() => this.setState({ idDeleteModalOpen: false })}
+            confirmText={'Yes, I want'}
+            onConfirm={this.onRecordingDelete}
+            backdrop={true}
+          />
+        }
+
+        {this.state.isVideoModalOpen &&
+          <VideoPopup
+            src={videoSrc}
+            duration={recording.duration}
+            type={'video/webm'}
+          />
+        }
       </div>
     );
   }

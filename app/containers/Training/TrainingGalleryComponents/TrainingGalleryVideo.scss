@@ -1,3 +1,6 @@
+@import '../../../materialize/sass/components/color-variables';
+@import '../../../materialize/sass/components/color-classes';
+@import '../../../materialize/sass/components/variables';
 .container {
   background-color: rgba(255, 255, 255, 1);
   padding: 0.5rem;
@@ -22,8 +25,7 @@
   float: left;
   margin-bottom: -100%;
   background-color: rgba(30, 30, 30, 0.4);
-
-  > .alignment {
+  >.alignment {
     display: table-cell;
     vertical-align: middle;
     text-align: center;
@@ -33,20 +35,33 @@
 .video-hover {
   width: 100%;
   height: 11.15rem;
-  z-index: 100; 
+  z-index: 100;
   margin-bottom: -100%;
   position: relative;
   float: left;
 }
-.play-btn{
-  color: white;
 
-  &:hover, &:focus {
+.play-btn {
+  color: white;
+  &:hover,
+  &:focus {
     cursor: pointer;
     color: #EEE;
   }
-
   &:active {
     color: #BBB;
+  }
+}
+
+.delete-btn {
+  float: right;
+  color: color("materialize-red", "darken-1");
+  &:hover,
+  &:focus {
+    color: color("materialize-red", "lighten-1");
+    cursor: pointer;
+  }
+  &:active {
+    color: color("materialize-red", "darken-1");
   }
 }
