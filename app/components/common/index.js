@@ -5,5 +5,5 @@ export { Icon } from './Icon';
 export { Button, LinkButton } from './Button';
 export { CountDown, CountDownTime } from './Timer';
 export { Modal } from './Modal';
-export { VideoPopup, VideoControls, VideoPlayer } from './Video';
+export { VideoPopup, VideoControls, VideoPlayer, VideoFramePopup } from './Video';
 export { MessageBox } from './MessageBox';

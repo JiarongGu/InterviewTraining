@@ -18,12 +18,12 @@
 }
 
 .title {
-  >h2, >span {
+  >h2,
+  >span {
     line-height: 5rem;
     display: inline-block;
     vertical-align: middle;
   }
-
   >span {
     font-size: 1.5rem;
     margin-left: 1rem;
@@ -40,8 +40,7 @@
 .gallery {
   width: 100%;
   margin-bottom: 3rem;
-
-  > div {
+  >div {
     padding-bottom: 0.5rem;
   }
 }
@@ -56,21 +55,29 @@
   position: fixed;
   top: 50%;
   color: color("teal", "lighten-1");
-  
   &.next {
     right: 4rem;
   }
-
   &.previous {
     left: 4rem;
   }
-
   &:hover {
     cursor: pointer;
     color: color("teal", "lighten-2");
   }
-
   &:active {
     color: color("teal", "darken-1");
+  }
+}
+
+.empty-message {
+  display: table;
+  height: calc(100% - 8rem);
+  text-align: center;
+  width: 100%;
+  color: #888;
+  >h3 {
+    display: table-cell;
+    vertical-align: middle;
   }
 }

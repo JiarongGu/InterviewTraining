@@ -1,24 +1,42 @@
 @import '../../materialize/sass/components/color-variables';
 @import '../../materialize/sass/components/color-classes';
 @import '../../materialize/sass/components/variables';
-
 .container {
-    width: 100%;
-    margin-top: 1rem;
-} 
+  width: 100vw;
+  height: calc(100vh - 64px);
+  background-color: color("teal", "lighten-5");
+  display: table;
+}
 
 .view-link {
-    padding: 0.5rem;
-    text-align: center;
-    text-decoration: underline;
-    display: inline-block;margin: auto;
-    left: 0;
-    right: 0;
-    display: table;
-    margin: auto;
+  padding: 0.5rem;
+  padding-top: 1rem;
+  text-align: center;
+  text-decoration: underline;
+  left: 0;
+  right: 0;
+  display: table;
+  margin: auto;
+  >a {
+    color: color('teal', 'darken-1');
+    font-size: 1.2rem;
+  }
+}
 
-    > a {
-        color: color('teal', 'darken-1');
-        font-size: 1.2rem;
-    }
+.gallery {
+  width: 100%;
+  margin-bottom: 3rem;
+  >div {
+    padding-bottom: 0.5rem;
+  }
+}
+
+.row {
+  margin-bottom: 2rem;
+}
+
+.content {
+  width: 100%;
+  height: 100%;
+  padding: 7.4rem 8%;
 }

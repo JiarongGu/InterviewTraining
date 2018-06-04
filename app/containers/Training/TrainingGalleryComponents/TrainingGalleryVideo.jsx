@@ -3,13 +3,7 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import {
-  Modal,
-  Card,
-  Icon,
-  VideoPopup,
-  MessageBox
-} from '../../../components/common';
+import { VideoPopup } from '../../../components/common';
 import { SectionClose } from '../../../components/layout';
 import { TrainingGalleryVideoHoverOverLay } from './TrainingGalleryVideoHoverOverLay';
 import { TrainingGalleryVideoDelete } from './TrainingGalleryVideoDelete';
@@ -73,10 +67,7 @@ export class TrainingGalleryVideo extends Component<Props, State> {
           <span>{formatSeconds(recording.duration)}</span>
         </div>
 
-        <TrainingGalleryVideoDelete
-          recording={recording}
-          onDelete={onDelete}
-        />
+        <TrainingGalleryVideoDelete recording={recording} onDelete={onDelete} />
 
         {this.state.isVideoModalOpen && (
           <VideoPopup

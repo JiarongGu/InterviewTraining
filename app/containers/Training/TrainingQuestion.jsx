@@ -49,7 +49,7 @@ class TrainingQuestionComponent extends Component<Props> {
         <TrainingSectionClose />
         <div className={styles.container}>
           <div className={styles.title}>
-            <h1>Question {questionIndex + 1}</h1>
+            <h3>Question {questionIndex + 1}</h3>
           </div>
           {question && (
             <div className={styles.content}>

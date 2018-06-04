@@ -60,7 +60,7 @@ export class Camera extends Component<Props, State> {
     navigator.mediaDevices
       .getUserMedia({
         video: {
-          aspectRatio: { ideal: 1.802259887 }
+          aspectRatio: { ideal: 1256 / 708 }
         },
         audio: true
       })

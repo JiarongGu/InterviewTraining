@@ -53,7 +53,6 @@ export class TrainingGallery extends Component<Props> {
 
   getRecordings() {
     const recordingService = new RecordingService();
-
     return recordingService.getByQuestionId(this.props.question.id);
   }
 
@@ -80,12 +79,14 @@ export class TrainingGallery extends Component<Props> {
                 <div className={styles.title}>
                   <h2>Takes</h2> <span>{question.question}</span>
                 </div>
+                {recordings.length === 0 && (
+                  <div className={styles['empty-message']}>
+                    <h3>Your don't have any take yet</h3>
+                  </div>
+                )}
                 <div className={styles.gallery}>
                   {[0, 3].map(row => (
-                    <div
-                      key={row}
-                      className={classNames(mStyles['row'], styles.row)}
-                    >
+                    <div key={row} className={mStyles['row']}>
                       {recordings
                         .slice(row, row + 3)
                         .map((recording, index) => (
@@ -97,7 +98,7 @@ export class TrainingGallery extends Component<Props> {
                             )}
                           >
                             <TrainingGalleryVideo
-                              index={ (index + row + 1) + (page - 1) * 6 }
+                              index={index + row + 1 + (page - 1) * 6}
                               recording={recording}
                               onDelete={() =>
                                 this.setState({
@@ -114,7 +115,13 @@ export class TrainingGallery extends Component<Props> {
                   <div
                     className={classNames(styles['page-arrow'], styles.next)}
                   >
-                    <Icon icon={'angle-right'} size={'5x'} onClick={() => {this.setState({ page: page + 1 })}}/>
+                    <Icon
+                      icon={'angle-right'}
+                      size={'5x'}
+                      onClick={() => {
+                        this.setState({ page: page + 1 });
+                      }}
+                    />
                   </div>
                 )}
                 {showPrevious && (
@@ -124,7 +131,13 @@ export class TrainingGallery extends Component<Props> {
                       styles.previous
                     )}
                   >
-                    <Icon icon={'angle-left'} size={'5x'} onClick={() => {this.setState({ page: page -1 })}} />
+                    <Icon
+                      icon={'angle-left'}
+                      size={'5x'}
+                      onClick={() => {
+                        this.setState({ page: page - 1 });
+                      }}
+                    />
                   </div>
                 )}
               </div>

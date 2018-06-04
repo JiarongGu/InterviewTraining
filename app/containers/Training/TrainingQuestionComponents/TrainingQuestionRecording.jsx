@@ -41,7 +41,7 @@ export class TrainingQuestionRecording extends Component<Props> {
             index={index}
           />
         )}
-        <h3>{question.question}</h3>
+        <h1>{question.question}</h1>
         <div className={styles.control}>
           <Button
             className={classNames(mStyles['btn-large'], styles.button)}

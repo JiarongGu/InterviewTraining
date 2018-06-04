@@ -1,0 +1,1 @@
+export { TrainingExampleImage } from './TrainingExampleImage';
