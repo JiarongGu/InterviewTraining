@@ -1,3 +1,7 @@
+@import '../../materialize/sass/components/color-variables';
+@import '../../materialize/sass/components/color-classes';
+@import '../../materialize/sass/components/variables';
+
 .container {
   position: absolute;
   display: table;
@@ -18,8 +22,39 @@
   }
 }
 
+.card-container {
+  width: 100vw;
+  padding: 0 6.5rem;
+  .card-col {
+    padding: 0 3rem;
+  }
+}
+
+.caption {
+  width: 100vw;
+  padding: 1.0rem 9.5rem;
+  padding-top: 2rem;
+  text-align: left;
+  font-size: 1.1rem;
+}
+
+.helper-link {
+  padding: 1.5rem 0;
+  padding-bottom: 2.5rem;
+
+  > a {
+    font-size: 1.2rem;
+    text-decoration: underline;
+    color: color("teal", "darken-1");
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
 .button-container {
-  padding-top: 5rem;
+  padding-top: 3rem;
 }
 
 .button {

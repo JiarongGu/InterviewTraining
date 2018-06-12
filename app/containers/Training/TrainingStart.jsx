@@ -4,6 +4,7 @@ import ReactCSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 import { Link, withRouter } from 'react-router-dom';
 import { Card, Camera, Icon, LinkButton } from '../../components/common';
 import { TrainingSectionClose } from '../../components/layout';
+import { TrainingStartLevelCard } from './TrainingStartComponents';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -22,8 +23,20 @@ type Props = {
   match: object,
 };
 
-class TrainingStartComponent extends Component<Props> {
+type State = {
+  selectedLevel: string,
+}
+
+class TrainingStartComponent extends Component<Props, State> {
   props: Props;
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      selectedLevel: 'basic'
+    }
+  }
 
   componentWillMount() {
     this.props.generateQuestions(5);
@@ -45,8 +58,48 @@ class TrainingStartComponent extends Component<Props> {
           {!loading && (
             <div className={styles.alignment}>
               <div>
-                <h1>Vedio Interview Self Training</h1>
+                <h3>Vedio Interview Self Training</h3>
               </div>
+
+              <div className={styles.caption}>
+                choose traning level:
+              </div>
+
+              <div>
+                <div className={classNames(mStyles.row, styles['card-container'])}>
+                  <div className={classNames(mStyles['col'], mStyles.m4, styles['card-col'])}>
+                    <TrainingStartLevelCard 
+                      title={'Basic'}
+                      color={'green'}
+                      questionAmount={10}
+                      difficulty={'Easy'}
+                      selected={this.state.selectedLevel=='basic'}
+                      onClick={() => { this.setState({ selectedLevel: 'basic' }) }}
+                    />
+                  </div>
+                  <div className={classNames(mStyles['col'], mStyles.m4, styles['card-col'])}>
+                    <TrainingStartLevelCard 
+                      title={'Advance'}
+                      color={'orange'}
+                      questionAmount={20}
+                      difficulty={'Hard'}
+                      selected={this.state.selectedLevel=='advance'}
+                      onClick={() => { this.setState({ selectedLevel: 'advance' }) }}
+                    />
+                  </div>
+                  <div className={classNames(mStyles['col'], mStyles.m4, styles['card-col'])}>
+                    <TrainingStartLevelCard 
+                      title={'Custom'}
+                      color={'blue'}
+                      questionAmount={4}
+                      difficulty={'Easy'}
+                      selected={this.state.selectedLevel=='custom'}
+                      onClick={() => { this.setState({ selectedLevel: 'custom' }) }}
+                    />
+                  </div>
+                </div>
+              </div>
+
               <div className={styles['button-container']}>
                 {questions.length > 0 && (
                   <LinkButton
@@ -56,6 +109,9 @@ class TrainingStartComponent extends Component<Props> {
                     <h5>Start</h5>
                   </LinkButton>
                 )}
+              </div>
+              <div className={styles['helper-link']}>
+                <a>First time use? Click here for guide</a>
               </div>
             </div>
           )}
