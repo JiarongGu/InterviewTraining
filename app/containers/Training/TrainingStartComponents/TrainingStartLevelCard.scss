@@ -77,9 +77,10 @@
 }
 
 .select-icon {
-  line-height: 4.5rem;
+  height: 4.5rem !important;
+  width: 4.5rem !important;
+  line-height: 4.5rem !important;
   text-align: center;
-  width: 4.5rem;
 }
 
 .selected-icon {
