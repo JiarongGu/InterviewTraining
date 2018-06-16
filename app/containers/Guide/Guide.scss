@@ -17,22 +17,39 @@
 .content {
     display: block;
     position: relative;
-    height: 40%;
     padding: 0 7rem;
+    margin: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+}
+
+.title {
+    > p {
+        font-size: 1.2rem;
+        padding: 0.5rem;
+    }
 }
 
 .card {
     padding: 0 2rem !important;
     height: 100% !important;
     margin: auto;
+    position: relative;
+}
+
+.card-row{
+    height: 44%;
+    margin-bottom: 8%;
+    margin-top: 2rem;
 }
 
 .card-title {
     display: block;
-    text-align: center;
-    margin-top: 0.5rem;
-    padding: 2rem 1rem 1rem;
     white-space: nowrap;
+    position: absolute;
+    top: 1.2rem;
+    left: 3.2rem;
 }
 
 .card-content {
@@ -41,7 +58,7 @@
     margin: auto;
     left: 0;
     right: 0;
-    padding: 3.5rem 1rem;
+    padding: 4.5em 1.5rem 0;
     height: 100%;
 
     &:active, &:hover, &:focus {
@@ -55,6 +72,11 @@
         right: 0;
         display: inherit;
     }
+}
+
+.card-detail {
+    text-align: left;
+    padding-top: 2.5rem;
 }
 
 .helper-link {
