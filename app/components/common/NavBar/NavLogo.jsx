@@ -14,12 +14,11 @@ export class NavLogo extends React.Component<Props> {
 
     render() {
         return (
-            <Link
-                to={this.props.href}
+            <div
                 className={this.props.className || mStyles['brand-logo']}
             >
                 {this.props.children}
-            </Link>
+            </div>
         );
     }
 }

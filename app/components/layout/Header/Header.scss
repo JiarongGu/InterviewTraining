@@ -1,15 +1,25 @@
+@import '../../../materialize/sass/components/color-variables';
+@import '../../../materialize/sass/components/color-classes';
+@import '../../../materialize/sass/components/variables';
+
 .container {
-    padding: 0 1.5rem;
+  padding: 0 1.5rem;
 }
 
 .brand-logo {
-    position: absolute;
-    color: #fff;
-    display: inline-block;
-    font-size: 1.5rem;
-    padding: 0 1.5rem;
+  position: absolute;
+  color: #fff;
+  display: inline-block;
+  font-size: 1.5rem;
+  padding: 0 1.5rem;
 }
 
 .item {
-    font-size: 1.2rem;
+  font-size: 1.2rem;
+}
+
+.side-menu-button {
+  &:hover {
+    cursor: pointer;
+  }
 }

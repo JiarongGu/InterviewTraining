@@ -1,0 +1,43 @@
+@import '../../../materialize/sass/components/color-variables';
+@import '../../../materialize/sass/components/color-classes';
+@import '../../../materialize/sass/components/variables';
+.menu {
+  >li {
+    display: block;
+    width: 100%;
+    padding: 0 1rem;
+    line-height: 3.5rem;
+    height: 3.5rem;
+    display: table;
+    &:hover, &:focus {
+      background-color: color("teal", "base");
+      cursor: pointer;
+    }
+    a:hover, a:focus {
+      background-color: color("teal", "base");
+    }
+    i {
+      width: 3rem;
+      display: table-cell;
+      vertical-align: middle;
+    }
+    span {
+      display: table-cell;
+      vertical-align: middle;
+      font-size: 1rem;
+      font-weight: bold;
+    }
+  }
+}
+
+.container {
+  position: fixed;
+  top: 64px;
+  left: 0;
+  height: calc(100vh - 64px);
+  background-color: color("teal", "lighten-2");
+  z-index: 10000;
+  width: 15rem;
+  box-shadow: 2px 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+}
+
