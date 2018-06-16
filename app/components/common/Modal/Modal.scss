@@ -1,3 +1,7 @@
+@import '../../../materialize/sass/components/color-variables';
+@import '../../../materialize/sass/components/color-classes';
+@import '../../../materialize/sass/components/variables';
+
 .overlay {
   display: table;
   position: fixed;
@@ -20,4 +24,11 @@
 .alignment {
   display: table;
   margin: auto;
+}
+
+.modal-full-screen {
+  width: 100vw;
+  height: calc(100vh - 64px);
+  background-color: color("teal", "lighten-5");
+  display: table;
 }

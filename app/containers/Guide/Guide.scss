@@ -118,3 +118,57 @@
         }
     }
 }
+
+.self-training-guide-container {
+    display: table;
+    height: calc(100vh - 64px);
+    width: 100vw;
+}
+
+.guide-img {
+    margin-top: 1rem;
+    width: 68vw;
+}
+
+.guide-img-container {
+    display: table-cell;
+    vertical-align: middle;
+
+    >div {
+        margin: auto;
+        display: table;
+    }
+}
+
+.dot-container {
+    text-align: center;
+    margin-top: 1rem;
+    > i {
+        padding: 0 0.25rem;
+        color: color("teal", "lighten-4");
+        text-shadow: 0 0 1px color("teal", "darken-4");
+
+        &.selected {
+            color: color("teal", "lighten-2");
+        }
+    }
+}
+
+.page-arrow {
+    position: fixed;
+    top: 50%;
+    color: color("teal", "lighten-1");
+    &.next {
+      right: 4rem;
+    }
+    &.previous {
+      left: 4rem;
+    }
+    &:hover {
+      cursor: pointer;
+      color: color("teal", "lighten-2");
+    }
+    &:active {
+      color: color("teal", "darken-1");
+    }
+  }

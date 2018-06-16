@@ -5,6 +5,7 @@ import { Link, withRouter } from 'react-router-dom';
 import { Card, Camera, Icon, LinkButton } from '../../components/common';
 import { TrainingSectionClose } from '../../components/layout';
 import { TrainingStartLevelCard } from './TrainingStartComponents';
+import { SelfTrainingGuide } from '../Guide';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -20,12 +21,13 @@ type Props = {
   loading: boolean,
   questions: [],
   history: object,
-  match: object,
+  match: object
 };
 
 type State = {
   selectedLevel: string,
-}
+  selfTraningGuideOpen: boolean
+};
 
 class TrainingStartComponent extends Component<Props, State> {
   props: Props;
@@ -35,7 +37,7 @@ class TrainingStartComponent extends Component<Props, State> {
 
     this.state = {
       selectedLevel: 'basic'
-    }
+    };
   }
 
   componentWillMount() {
@@ -55,46 +57,77 @@ class TrainingStartComponent extends Component<Props, State> {
       >
         <div className={styles.container} data-tid="container">
           <TrainingSectionClose />
+          {this.state.selfTraningGuideOpen && (
+            <SelfTrainingGuide
+              onClose={() => {
+                this.setState({ selfTraningGuideOpen: false });
+              }}
+            />
+          )}
           {!loading && (
             <div className={styles.alignment}>
               <div>
                 <h3>Vedio Interview Self Training</h3>
               </div>
 
-              <div className={styles.caption}>
-                choose traning level:
-              </div>
+              <div className={styles.caption}>choose traning level:</div>
 
               <div>
-                <div className={classNames(mStyles.row, styles['card-container'])}>
-                  <div className={classNames(mStyles['col'], mStyles.m4, styles['card-col'])}>
-                    <TrainingStartLevelCard 
+                <div
+                  className={classNames(mStyles.row, styles['card-container'])}
+                >
+                  <div
+                    className={classNames(
+                      mStyles['col'],
+                      mStyles.m4,
+                      styles['card-col']
+                    )}
+                  >
+                    <TrainingStartLevelCard
                       title={'Basic'}
                       color={'green'}
                       questionAmount={10}
                       difficulty={'Easy'}
-                      selected={this.state.selectedLevel=='basic'}
-                      onClick={() => { this.setState({ selectedLevel: 'basic' }) }}
+                      selected={this.state.selectedLevel == 'basic'}
+                      onClick={() => {
+                        this.setState({ selectedLevel: 'basic' });
+                      }}
                     />
                   </div>
-                  <div className={classNames(mStyles['col'], mStyles.m4, styles['card-col'])}>
-                    <TrainingStartLevelCard 
+                  <div
+                    className={classNames(
+                      mStyles['col'],
+                      mStyles.m4,
+                      styles['card-col']
+                    )}
+                  >
+                    <TrainingStartLevelCard
                       title={'Advance'}
                       color={'orange'}
                       questionAmount={20}
                       difficulty={'Hard'}
-                      selected={this.state.selectedLevel=='advance'}
-                      onClick={() => { this.setState({ selectedLevel: 'advance' }) }}
+                      selected={this.state.selectedLevel == 'advance'}
+                      onClick={() => {
+                        this.setState({ selectedLevel: 'advance' });
+                      }}
                     />
                   </div>
-                  <div className={classNames(mStyles['col'], mStyles.m4, styles['card-col'])}>
-                    <TrainingStartLevelCard 
+                  <div
+                    className={classNames(
+                      mStyles['col'],
+                      mStyles.m4,
+                      styles['card-col']
+                    )}
+                  >
+                    <TrainingStartLevelCard
                       title={'Custom'}
                       color={'blue'}
                       questionAmount={4}
                       difficulty={'Easy'}
-                      selected={this.state.selectedLevel=='custom'}
-                      onClick={() => { this.setState({ selectedLevel: 'custom' }) }}
+                      selected={this.state.selectedLevel == 'custom'}
+                      onClick={() => {
+                        this.setState({ selectedLevel: 'custom' });
+                      }}
                     />
                   </div>
                 </div>
@@ -111,7 +144,13 @@ class TrainingStartComponent extends Component<Props, State> {
                 )}
               </div>
               <div className={styles['helper-link']}>
-                <a>First time use? Click here for guide</a>
+                <a
+                  onClick={() => {
+                    this.setState({ selfTraningGuideOpen: true });
+                  }}
+                >
+                  First time use? Click here for guide
+                </a>
               </div>
             </div>
           )}
@@ -132,6 +171,9 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(QuestionActions, dispatch);
 }
 
-export const TrainingStart = withRouter(connect(mapStateToProps, mapDispatchToProps)(
-  TrainingStartComponent
-));
+export const TrainingStart = withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(TrainingStartComponent)
+);
