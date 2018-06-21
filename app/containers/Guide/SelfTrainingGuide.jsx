@@ -6,6 +6,7 @@ import { Card, Camera, Icon, Modal } from '../../components/common';
 import { BackNavigation, SectionClose } from '../../components/layout';
 import mStyles from '../../materialize/sass/materialize.scss';
 import classNames from 'classnames';
+import { FilePaths } from '../../services';
 
 type Props = {
   onClose: () => void
@@ -59,7 +60,7 @@ export class SelfTrainingGuide extends Component<Props, State> {
             <div>
               <img
                 className={styles['guide-img']}
-                src={`./dist/guide/00${page}.png`}
+                src={FilePaths.resolve(`../data/guide/00${page}.png`)}
               />
               <div className={styles['dot-container']}>
                 <Icon
